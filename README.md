@@ -2,7 +2,7 @@ Le Bois des Cancres
 ===========
 
 Développé par Clément Cardon et Edi Hamiti
-Contacts : clement.cardon.etu@univ-lille.fr , edi.hamiti.etu@univ-lille.fr
+Contacts : clement.cardon3.etu@univ-lille.fr , edi.hamiti.etu@univ-lille.fr
 
 # Présentation du Bois des Cancres
 
