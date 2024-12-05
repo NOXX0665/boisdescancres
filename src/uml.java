@@ -1,7 +1,7 @@
 import extensions.File;
-import extensions.CSV;
+import extensions.CSVFile;
 
-class BoisDesCancres extends Program {
+class BoisDesCancres2 extends Program {
     Joueur joueur;
 
     void algorithm() {
