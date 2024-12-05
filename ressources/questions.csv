@@ -1,8 +1,9 @@
 id,difficulté,question,liste_reponses
-1,1,Eh toi comment tu dis “bonjour” en anglais steuplé ?,hello
-2,1,Comment dit-on "je" en anglais ?,i
-3,1,Comment dit-on "tu" ou "vous" en anglais ?,you
-4,1,Comment dit-on "il" en anglais ?,he
-5,1,Comment dit-on "elle" en anglais ?,she
-6,1,Comment dit-on "ils" ou "elles" en anglais ?,they
-7,3,Comment dit-on “pêcheur” en anglais ?,fisherman;fisher;angler
+1,1,Ceci est une question test les réponses disponibles sont A B ou C,a;b;c
+2,1,Eh toi comment tu dis “bonjour” en anglais steuplé ?,hello
+3,1,Comment dit-on "je" en anglais ?,i
+4,1,Comment dit-on "tu" ou "vous" en anglais ?,you
+5,1,Comment dit-on "il" en anglais ?,he
+6,1,Comment dit-on "elle" en anglais ?,she
+7,1,Comment dit-on "ils" ou "elles" en anglais ?,they
+8,3,Comment dit-on “pêcheur” en anglais ?,fisherman;fisher;angler
