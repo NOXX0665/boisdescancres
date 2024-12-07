@@ -11,7 +11,7 @@ Vous êtes bloqués dans le Bois des Cancres, la forêt où se cache tous les pi
 Des captures d'écran illustrant le fonctionnement du logiciel sont proposées dans le répertoire shots.
 
 
-# Utilisation du Bois des Cancrs
+# Utilisation du Bois des Cancres
 
 Afin d'utiliser le projet, il suffit de taper les commandes suivantes dans un terminal :
 
