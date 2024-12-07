@@ -161,10 +161,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         }
     }
 
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> 43e377e (Système des points bonus)
 
     ////////////////////////////////////////////
     // Fonctions pour manipuler les questions //
