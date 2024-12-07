@@ -23,6 +23,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         } else if (choix==1) {
             JOUEUR=creerJoueur();
         } else {
+            //Je suis pas fière de moi là dessus, faudrait trouver une meilleure solution qui dit
             println("Choix invalide. Veuillez redémarrer le jeu et choisir 1 ou 2.");
             System.exit(0); //Est-ce qu'on a le droit d'utiliser System.exit() ?
         }
@@ -36,30 +37,26 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         } else if (JOUEUR.score==4) {
             println("C'est parti pour le niveau Très Difficile !");
         }
+        delay(1000);
 
         String reponse = "1";
 
         while (!equals(reponse, "3")) {
             clearScreen();
             if (equals(reponse, "1")) {
+<<<<<<< Updated upstream
                 
                 //Choix d'une question basée sur le niveau du JOUEUR
+=======
+                //Choix d'une question basée sur le niveau du joueur
+>>>>>>> Stashed changes
                 int idQuestion = questionAleatoire(); //à faire
-                print("Question n°"+idQuestion+": ");
-                println(getQuestion(idQuestion)+"\n\n"); //à faire
-                print("Votre réponse > ");
-                reponse=readString();
-                if (estBonneReponse(idQuestion, reponse)) {
-                    println("Bonne réponse !");
-                    ajouterPoints(idQuestion); //à faire
-                } else {
-                    println("Mauvaise réponse...");
-                    println("La bonne réponse était : "+getReponses(idQuestion)[0]);
-                }
+
+                //On pose la question et on vérifie si la réponse est bonne
+                boolean bonneReponse = poserQuestion(idQuestion); //en cours
             } else if (equals(reponse, "2")) {
-                println("Les statistiques ne sont pas encore disponibles:(");
-            } else {
-                println("Choix invalide. Veuillez choisir 1, 2 ou 3.");
+                //Affichage des statistiques du joueur
+                print("L'affichage des statistiques n'est pas encore implémenté.");
             }
 
             //Menu du jeu :
@@ -72,7 +69,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         }
 
         //Sauvegarde et quitter
-
         println("Sauvegarde en cours...");
         delay(1000); //Un peu de délai pour faire croire qu'on seuvegarde vraiment :)
         println("Partie sauvegardée. Au revoir !");
@@ -82,6 +78,35 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     }
 
 
+    boolean poserQuestion(int idQuestion) {
+        //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
+        print("Question n°"+idQuestion+": ");
+        println(getQuestion(idQuestion)+"\n\n");
+        }
+
+        boolean reponseValide = false; //Une réponse valide est soit une bonne réponse, soit un indice, soit un passage de question (dans les deux derniers cas, c'est true seulement si le joueur a assez de points bonus)
+
+        while (!reponseValide) {
+            reponseValide = demanderReponse(idQuestion);
+        }
+
+        return true;
+    }
+
+    boolean demanderReponse(int idQuestion) {
+        //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
+        print("Votre réponse > ");
+        String reponse = readString();
+        if (estBonneReponse(idQuestion, reponse)) { //Si c'est une bonne réponse
+            println("Bonne réponse !");
+            return true;
+        } else { //Si ce n'est pas la bonne réponse
+            println("Mauvaise réponse...");
+            println("La bonne réponse était : "+getReponses(1)[0]);
+            return false;
+        }
+    }
+
 
     ////////////////////////////////////////////
     // Fonctions pour manipuler les questions //
@@ -90,6 +115,8 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         //Schéma de questions.csv :
         //ID,Difficulté,Question,RéponsesPossibles
         //RéponsesPossibles est une liste de réponses séparées par des points-virgules
+        //
+        //La première question (ID=1) est une question test pour vérifier que tout fonctionne bien. Cette question est utilisée dans les fonctions de tests
 
     String getQuestion(int id) {
         //Retourne la question correspondant à l'ID
@@ -147,6 +174,15 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         return 1;
     }
 
+<<<<<<< Updated upstream
+=======
+    int[] tableauPoids() {
+        //Utilise les stats du joueur pour retourner un tableau de poids pour chaque question
+        //A faire
+        return new int[1];
+    }
+
+>>>>>>> Stashed changes
     boolean estBonneReponse(int id, String reponse) {
         //Retourne vrai si la réponse du joueur est dans la liste des bonne réponses, faux sinon
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
@@ -169,6 +205,10 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
     
 
+
+    void testGetIndices() {
+        assertEquals("Les réponses sont A B ou C", getIndices(1));
+    }
 
 
     ////////////////////////////////////////////
@@ -193,9 +233,13 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         print("> ");
         int niveau = readInt();
 
-        //Il faudrait se mettre d'accord sur quels points il faut pour chaque niveau
+        //Il faudrait se mettre d'accord sur combien de points il faut pour chaque niveau
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
+<<<<<<< Updated upstream
         return newJoueur(nom, niveau, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment ?
+=======
+        return newJoueur(nom, niveau, 3, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment vu qu'il y aura de plus en plus de stats ?
+>>>>>>> Stashed changes
     }
 
     Joueur newJoueur(String nom, int score, int[][] stats_questions) {
@@ -211,6 +255,15 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         return new Joueur();
     }
 
+<<<<<<< Updated upstream
+=======
+    int pointsToNiveau(int points) {
+        //Retourne le niveau correspondant à un nombre de points
+        //à remplir
+        return 1;
+    }
+
+>>>>>>> Stashed changes
     void saveJoueur() {
         //à remplir
     }
@@ -227,10 +280,5 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         while (ready(fichier)){
             println(fichier.readLine());
         }
-    }
-
-    void ajouterPoints(int id) {
-        println("!!!!!!!!!!!!!! Fonction ajouterPoints à faire !");
-        //à remplir
     }
 }
