@@ -2,12 +2,14 @@ import extensions.File;
 import extensions.CSVFile;
 
 class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA CLASSE ICI ET DANS LE run.sh !!!
-    Joueur JOUEUR;
+    Joueur joueur;
+    Joueur joueur;
     final String CHEMIN_QUESTIONS = "ressources/questions.csv";
 
     void algorithm() {
         //Menu d'accueil
-        //On demande au JOUEUR s'il veut commencer une nouvelle partie ou charger une sauvegarde
+        //On demande au joueur s'il veut commencer une nouvelle partie ou charger une sauvegarde
+        //On demande au joueur s'il veut commencer une nouvelle partie ou charger une sauvegarde
         afficherImage("ressources/ascii_art/logo.txt");
         println("Bienvenue dans le Bois Des Cancres !");
         println("1. Nouvelle partie");
@@ -19,22 +21,28 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
             afficherListeSave();
             print("> ");
             int choixSave = readInt();
-            JOUEUR=chargerJoueur(choixSave); //à faire
+            joueur=chargerJoueur(choixSave); //à faire
+            joueur=chargerJoueur(choixSave); //à faire
         } else if (choix==1) {
-            JOUEUR=creerJoueur();
+            joueur=creerJoueur();
+            joueur=creerJoueur();
         } else {
             //Je suis pas fière de moi là dessus, faudrait trouver une meilleure solution qui dit
             println("Choix invalide. Veuillez redémarrer le jeu et choisir 1 ou 2.");
             System.exit(0); //Est-ce qu'on a le droit d'utiliser System.exit() ?
         }
 
-        if (JOUEUR.score==1) {
+        if (joueur.score==1) {
+        if (joueur.score==1) {
             println("C'est parti pour le niveau Facile !");
-        } else if (JOUEUR.score==2) {
+        } else if (joueur.score==2) {
+        } else if (joueur.score==2) {
             println("C'est parti pour le niveau Moyen !");
-        } else if (JOUEUR.score==3) {
+        } else if (joueur.score==3) {
+        } else if (joueur.score==3) {
             println("C'est parti pour le niveau Difficile !");
-        } else if (JOUEUR.score==4) {
+        } else if (joueur.score==4) {
+        } else if (joueur.score==4) {
             println("C'est parti pour le niveau Très Difficile !");
         }
         delay(1000);
@@ -44,12 +52,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         while (!equals(reponse, "3")) {
             clearScreen();
             if (equals(reponse, "1")) {
-<<<<<<< Updated upstream
-                
-                //Choix d'une question basée sur le niveau du JOUEUR
-=======
                 //Choix d'une question basée sur le niveau du joueur
->>>>>>> Stashed changes
                 int idQuestion = questionAleatoire(); //à faire
 
                 //On pose la question et on vérifie si la réponse est bonne
@@ -70,11 +73,9 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Sauvegarde et quitter
         println("Sauvegarde en cours...");
-        delay(1000); //Un peu de délai pour faire croire qu'on seuvegarde vraiment :)
+        delay(1000); //Il faut faire la fonction de sauvegarde
+        delay(1000); //Il faut faire la fonction de sauvegarde
         println("Partie sauvegardée. Au revoir !");
-    
-        
-        //à remplir
     }
 
 
@@ -107,13 +108,76 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         }
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> 43e377e (Système des points bonus)
+    boolean poserQuestion(int idQuestion) {
+        //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
+        print("Question n°"+idQuestion+": ");
+        println(getQuestion(idQuestion)+"\n\n");
+<<<<<<< HEAD
+=======
+        if (joueur.pointsBonus>0) {
+            println("Il vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.");
+>>>>>>> 43e377e (Système des points bonus)
+        }
+
+        boolean reponseValide = false; //Une réponse valide est soit une bonne réponse, soit un indice, soit un passage de question (dans les deux derniers cas, c'est true seulement si le joueur a assez de points bonus)
+
+        while (!reponseValide) {
+            reponseValide = demanderReponse(idQuestion);
+        }
+
+        return true;
+    }
+
+    boolean demanderReponse(int idQuestion) {
+        //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
+        print("Votre réponse > ");
+        String reponse = readString();
+        if (estBonneReponse(idQuestion, reponse)) { //Si c'est une bonne réponse
+            println("Bonne réponse !");
+<<<<<<< HEAD
+            return true;
+=======
+            ajouterPointsBonus(idQuestion);
+            return true;
+        } else if (equals(reponse, "passer")) { //Si le joueur veut passer la question
+            if (joueur.pointsBonus>0) {
+                println("Vous avez passé la question.");
+                joueur.pointsBonus--;
+                return true;
+            } else {
+                println("Vous n'avez pas assez de points bonus pour passer la question.");
+                return false;
+            }
+        } else if (equals(reponse, "indice")) { //Si le joueur veut un indice
+            if (joueur.pointsBonus>0) {
+                println("Indice : "+getIndices(idQuestion));
+                joueur.pointsBonus--;
+                return true;
+            } else {
+                println("Vous n'avez pas assez de points bonus pour demander un indice.");
+                return false;
+            }
+>>>>>>> 43e377e (Système des points bonus)
+        } else { //Si ce n'est pas la bonne réponse
+            println("Mauvaise réponse...");
+            println("La bonne réponse était : "+getReponses(1)[0]);
+            return false;
+        }
+    }
+
 
     ////////////////////////////////////////////
     // Fonctions pour manipuler les questions //
     ////////////////////////////////////////////
 
         //Schéma de questions.csv :
-        //ID,Difficulté,Question,RéponsesPossibles
+        //ID,Difficulté,Question,RéponsesPossibles,Indice(s)   //Est-ce qu'on devrait faire plusieurs indices par question ?
+        //ID,Difficulté,Question,RéponsesPossibles,Indice(s)   //Est-ce qu'on devrait faire plusieurs indices par question ?
         //RéponsesPossibles est une liste de réponses séparées par des points-virgules
         //
         //La première question (ID=1) est une question test pour vérifier que tout fonctionne bien. Cette question est utilisée dans les fonctions de tests
@@ -169,20 +233,17 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     }
 
     int questionAleatoire() {
-        //Retourne l'ID d'une question aléatoire en fonction du niveau du JOUEUR
-        int niveau = JOUEUR.score;
+        //Retourne l'ID d'une question aléatoire en fonction du niveau du joueur
+        int niveau = joueur.score;
         return 1;
     }
 
-<<<<<<< Updated upstream
-=======
     int[] tableauPoids() {
         //Utilise les stats du joueur pour retourner un tableau de poids pour chaque question
         //A faire
         return new int[1];
     }
 
->>>>>>> Stashed changes
     boolean estBonneReponse(int id, String reponse) {
         //Retourne vrai si la réponse du joueur est dans la liste des bonne réponses, faux sinon
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
@@ -203,8 +264,11 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         assertFalse(estBonneReponse(1, "D"));
     }
 
-    
-
+    String getIndices(int id) {
+        //Retourne les indices de la question correspondant à l'ID
+        CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
+        return getCell(fichier, id, 4);
+    }
 
     void testGetIndices() {
         assertEquals("Les réponses sont A B ou C", getIndices(1));
@@ -214,6 +278,13 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     ////////////////////////////////////////////
     // Fonctions pour manipuler les joueurs   //
     ////////////////////////////////////////////
+
+    // Structure d'un joueur :
+
+    // String nom;
+    // int score;
+    // int pointsBonus;
+    // int[][] stats_questions;
 
     void afficherListeSave() {
         //Doit afficher tout le contenu du dossier de sauvegarde
@@ -235,17 +306,14 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Il faudrait se mettre d'accord sur combien de points il faut pour chaque niveau
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
-<<<<<<< Updated upstream
-        return newJoueur(nom, niveau, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment ?
-=======
         return newJoueur(nom, niveau, 3, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment vu qu'il y aura de plus en plus de stats ?
->>>>>>> Stashed changes
     }
 
-    Joueur newJoueur(String nom, int score, int[][] stats_questions) {
+    Joueur newJoueur(String nom, int score, int pointsBonus, int[][] stats_questions) {
         Joueur j = new Joueur();
         j.nom = nom;
         j.score = score;
+        j.pointsBonus = pointsBonus;
         j.stats_questions = stats_questions;
         return j;
     }
@@ -255,22 +323,41 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         return new Joueur();
     }
 
-<<<<<<< Updated upstream
-=======
     int pointsToNiveau(int points) {
         //Retourne le niveau correspondant à un nombre de points
         //à remplir
         return 1;
     }
 
->>>>>>> Stashed changes
     void saveJoueur() {
         //à remplir
     }
 
-    ////////////////////////////////////////////
+    /////////////////////////////////////
+    // Fonctions pour les points bonus //
+    /////////////////////////////////////
+
+    void ajouterPointsBonus(int idQuestion) {
+        //Vérifie si le joueur gagne un point bonus et l'ajoute à son score
+        //Un joueur peut gagner un point bonus avec une probabilité dépendant de son niveau et de la difficulté de la question
+        double proba = probaPoint(idQuestion);
+        if (random()<proba) {
+            joueur.pointsBonus++;
+            println("Vous avez gagné un point bonus !\nIl peut vous servir à passer une question ou à demander un indice.");
+        }
+    }
+
+    double probaPoint(int idQuestion) {
+        //Retourne la probabilité d'obtenir un point bonus
+        //La probabilité est calculée en fonction du niveau du joueur ainsi que du niveau de la question
+        // Chance pt bonus = (niveau de la question)-(notre niveau) * 0.1 +0.1
+        int niveauQuestion = getDifficulte(idQuestion);
+        int niveauJoueur = joueur.score;
+        return (niveauQuestion-niveauJoueur)*0.1+0.1;
+    }
 
 
+    /////////////////////////////////////
 
     void afficherImage(String chemin){
         //Affiche une image en ASCII art et supprime le contenu de la console.
