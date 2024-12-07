@@ -182,6 +182,13 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     // Fonctions pour manipuler les joueurs   //
     ////////////////////////////////////////////
 
+    // Structure d'un joueur :
+
+    // String nom;
+    // int score;
+    // int pointsBonus;
+    // int[][] stats_questions;
+
     void afficherListeSave() {
         //Doit afficher tout le contenu du dossier de sauvegarde
         String[] tabFichiers = getAllFilesFromDirectory("ressources/saves");
@@ -202,13 +209,14 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Il faudrait se mettre d'accord sur quels points il faut pour chaque niveau
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
-        return newJoueur(nom, niveau, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment ?
+        return newJoueur(nom, niveau, 0, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment ?
     }
 
-    Joueur newJoueur(String nom, int score, int[][] stats_questions) {
+    Joueur newJoueur(String nom, int score, int pointsBonus, int[][] stats_questions) {
         Joueur j = new Joueur();
         j.nom = nom;
         j.score = score;
+        j.pointsBonus = pointsBonus;
         j.stats_questions = stats_questions;
         return j;
     }
