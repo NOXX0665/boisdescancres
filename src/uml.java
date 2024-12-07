@@ -79,6 +79,59 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     }
 
 
+<<<<<<< Updated upstream
+=======
+    boolean poserQuestion(int idQuestion) {
+        //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
+        print("Question n°"+idQuestion+": ");
+        println(getQuestion(idQuestion)+"\n\n");
+        if (joueur.pointsBonus>0) {
+            println("Il vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.");
+        }
+
+        boolean reponseValide = false; //Une réponse valide est soit une bonne réponse, soit un indice, soit un passage de question (dans les deux derniers cas, c'est true seulement si le joueur a assez de points bonus)
+
+        while (!reponseValide) {
+            reponseValide = demanderReponse(idQuestion);
+        }
+
+        return true;
+    }
+
+    boolean demanderReponse(int idQuestion) {
+        //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
+        print("Votre réponse > ");
+        String reponse = readString();
+        if (estBonneReponse(idQuestion, reponse)) { //Si c'est une bonne réponse
+            println("Bonne réponse !");
+            ajouterPointsBonus(idQuestion);
+            return true;
+        } else if (equals(reponse, "passer")) { //Si le joueur veut passer la question
+            if (joueur.pointsBonus>0) {
+                println("Vous avez passé la question.");
+                joueur.pointsBonus--;
+                return true;
+            } else {
+                println("Vous n'avez pas assez de points bonus pour passer la question.");
+                return false;
+            }
+        } else if (equals(reponse, "indice")) { //Si le joueur veut un indice
+            if (joueur.pointsBonus>0) {
+                println("Indice : "+getIndices(idQuestion));
+                joueur.pointsBonus--;
+                return true;
+            } else {
+                println("Vous n'avez pas assez de points bonus pour demander un indice.");
+                return false;
+            }
+        } else { //Si ce n'est pas la bonne réponse
+            println("Mauvaise réponse...");
+            println("La bonne réponse était : "+getReponses(1)[0]);
+            return false;
+        }
+    }
+
+>>>>>>> Stashed changes
 
     ////////////////////////////////////////////
     // Fonctions pour manipuler les questions //
@@ -232,9 +285,31 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         //à remplir
     }
 
-    ////////////////////////////////////////////
+    /////////////////////////////////////
+    // Fonctions pour les points bonus //
+    /////////////////////////////////////
+
+    void ajouterPointsBonus(int idQuestion) {
+        //Vérifie si le joueur gagne un point bonus et l'ajoute à son score
+        //Un joueur peut gagner un point bonus avec une probabilité dépendant de son niveau et de la difficulté de la question
+        double proba = probaPoint(idQuestion);
+        if (random()<proba) {
+            joueur.pointsBonus++;
+            println("Vous avez gagné un point bonus !\nIl peut vous servir à passer une question ou à demander un indice.");
+        }
+    }
+
+    double probaPoint(int idQuestion) {
+        //Retourne la probabilité d'obtenir un point bonus
+        //La probabilité est calculée en fonction du niveau du joueur ainsi que du niveau de la question
+        // Chance pt bonus = (niveau de la question)-(notre niveau) * 0.1 +0.1
+        int niveauQuestion = getDifficulte(idQuestion);
+        int niveauJoueur = joueur.score;
+        return (niveauQuestion-niveauJoueur)*0.1+0.1;
+    }
 
 
+    /////////////////////////////////////
 
     void afficherImage(String chemin){
         //Affiche une image en ASCII art et supprime le contenu de la console.
