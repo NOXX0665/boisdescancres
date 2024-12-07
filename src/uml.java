@@ -79,8 +79,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     }
 
 
-<<<<<<< Updated upstream
-=======
     boolean poserQuestion(int idQuestion) {
         //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
         print("Question n°"+idQuestion+": ");
@@ -131,7 +129,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         }
     }
 
->>>>>>> Stashed changes
 
     ////////////////////////////////////////////
     // Fonctions pour manipuler les questions //
