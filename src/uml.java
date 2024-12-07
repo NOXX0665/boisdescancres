@@ -2,12 +2,12 @@ import extensions.File;
 import extensions.CSVFile;
 
 class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA CLASSE ICI ET DANS LE run.sh !!!
-    Joueur JOUEUR;
+    Joueur joueur;
     final String CHEMIN_QUESTIONS = "ressources/questions.csv";
 
     void algorithm() {
         //Menu d'accueil
-        //On demande au JOUEUR s'il veut commencer une nouvelle partie ou charger une sauvegarde
+        //On demande au joueur s'il veut commencer une nouvelle partie ou charger une sauvegarde
         afficherImage("ressources/ascii_art/logo.txt");
         println("Bienvenue dans le Bois Des Cancres !");
         println("1. Nouvelle partie");
@@ -19,22 +19,22 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
             afficherListeSave();
             print("> ");
             int choixSave = readInt();
-            JOUEUR=chargerJoueur(choixSave); //à faire
+            joueur=chargerJoueur(choixSave); //à faire
         } else if (choix==1) {
-            JOUEUR=creerJoueur();
+            joueur=creerJoueur();
         } else {
             //Je suis pas fière de moi là dessus, faudrait trouver une meilleure solution qui dit
             println("Choix invalide. Veuillez redémarrer le jeu et choisir 1 ou 2.");
             System.exit(0); //Est-ce qu'on a le droit d'utiliser System.exit() ?
         }
 
-        if (JOUEUR.score==1) {
+        if (joueur.score==1) {
             println("C'est parti pour le niveau Facile !");
-        } else if (JOUEUR.score==2) {
+        } else if (joueur.score==2) {
             println("C'est parti pour le niveau Moyen !");
-        } else if (JOUEUR.score==3) {
+        } else if (joueur.score==3) {
             println("C'est parti pour le niveau Difficile !");
-        } else if (JOUEUR.score==4) {
+        } else if (joueur.score==4) {
             println("C'est parti pour le niveau Très Difficile !");
         }
         delay(1000);
@@ -44,12 +44,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         while (!equals(reponse, "3")) {
             clearScreen();
             if (equals(reponse, "1")) {
-<<<<<<< Updated upstream
-                
-                //Choix d'une question basée sur le niveau du JOUEUR
-=======
                 //Choix d'une question basée sur le niveau du joueur
->>>>>>> Stashed changes
                 int idQuestion = questionAleatoire(); //à faire
 
                 //On pose la question et on vérifie si la réponse est bonne
@@ -70,11 +65,8 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Sauvegarde et quitter
         println("Sauvegarde en cours...");
-        delay(1000); //Un peu de délai pour faire croire qu'on seuvegarde vraiment :)
+        delay(1000); //Il faut faire la fonction de sauvegarde
         println("Partie sauvegardée. Au revoir !");
-    
-        
-        //à remplir
     }
 
 
@@ -113,7 +105,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     ////////////////////////////////////////////
 
         //Schéma de questions.csv :
-        //ID,Difficulté,Question,RéponsesPossibles
+        //ID,Difficulté,Question,RéponsesPossibles,Indice(s)   //Est-ce qu'on devrait faire plusieurs indices par question ?
         //RéponsesPossibles est une liste de réponses séparées par des points-virgules
         //
         //La première question (ID=1) est une question test pour vérifier que tout fonctionne bien. Cette question est utilisée dans les fonctions de tests
@@ -169,20 +161,18 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     }
 
     int questionAleatoire() {
-        //Retourne l'ID d'une question aléatoire en fonction du niveau du JOUEUR
-        int niveau = JOUEUR.score;
+        //Retourne l'ID d'une question aléatoire en fonction du niveau du joueur
+        int niveau = joueur.score;
         return 1;
     }
 
-<<<<<<< Updated upstream
-=======
+
     int[] tableauPoids() {
         //Utilise les stats du joueur pour retourner un tableau de poids pour chaque question
         //A faire
         return new int[1];
     }
 
->>>>>>> Stashed changes
     boolean estBonneReponse(int id, String reponse) {
         //Retourne vrai si la réponse du joueur est dans la liste des bonne réponses, faux sinon
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
@@ -203,8 +193,11 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         assertFalse(estBonneReponse(1, "D"));
     }
 
-    
-
+    String getIndices(int id) {
+        //Retourne les indices de la question correspondant à l'ID
+        CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
+        return getCell(fichier, id, 4);
+    }
 
     void testGetIndices() {
         assertEquals("Les réponses sont A B ou C", getIndices(1));
@@ -235,11 +228,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Il faudrait se mettre d'accord sur combien de points il faut pour chaque niveau
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
-<<<<<<< Updated upstream
-        return newJoueur(nom, niveau, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment ?
-=======
         return newJoueur(nom, niveau, 3, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment vu qu'il y aura de plus en plus de stats ?
->>>>>>> Stashed changes
     }
 
     Joueur newJoueur(String nom, int score, int[][] stats_questions) {
@@ -255,15 +244,12 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         return new Joueur();
     }
 
-<<<<<<< Updated upstream
-=======
     int pointsToNiveau(int points) {
         //Retourne le niveau correspondant à un nombre de points
         //à remplir
         return 1;
     }
 
->>>>>>> Stashed changes
     void saveJoueur() {
         //à remplir
     }
