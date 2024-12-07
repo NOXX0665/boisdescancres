@@ -3,10 +3,12 @@ import extensions.CSVFile;
 
 class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA CLASSE ICI ET DANS LE run.sh !!!
     Joueur joueur;
+    Joueur joueur;
     final String CHEMIN_QUESTIONS = "ressources/questions.csv";
 
     void algorithm() {
         //Menu d'accueil
+        //On demande au joueur s'il veut commencer une nouvelle partie ou charger une sauvegarde
         //On demande au joueur s'il veut commencer une nouvelle partie ou charger une sauvegarde
         afficherImage("ressources/ascii_art/logo.txt");
         println("Bienvenue dans le Bois Des Cancres !");
@@ -20,7 +22,9 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
             print("> ");
             int choixSave = readInt();
             joueur=chargerJoueur(choixSave); //à faire
+            joueur=chargerJoueur(choixSave); //à faire
         } else if (choix==1) {
+            joueur=creerJoueur();
             joueur=creerJoueur();
         } else {
             //Je suis pas fière de moi là dessus, faudrait trouver une meilleure solution qui dit
@@ -29,11 +33,15 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         }
 
         if (joueur.score==1) {
+        if (joueur.score==1) {
             println("C'est parti pour le niveau Facile !");
+        } else if (joueur.score==2) {
         } else if (joueur.score==2) {
             println("C'est parti pour le niveau Moyen !");
         } else if (joueur.score==3) {
+        } else if (joueur.score==3) {
             println("C'est parti pour le niveau Difficile !");
+        } else if (joueur.score==4) {
         } else if (joueur.score==4) {
             println("C'est parti pour le niveau Très Difficile !");
         }
@@ -65,6 +73,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Sauvegarde et quitter
         println("Sauvegarde en cours...");
+        delay(1000); //Il faut faire la fonction de sauvegarde
         delay(1000); //Il faut faire la fonction de sauvegarde
         println("Partie sauvegardée. Au revoir !");
     }
@@ -168,6 +177,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Schéma de questions.csv :
         //ID,Difficulté,Question,RéponsesPossibles,Indice(s)   //Est-ce qu'on devrait faire plusieurs indices par question ?
+        //ID,Difficulté,Question,RéponsesPossibles,Indice(s)   //Est-ce qu'on devrait faire plusieurs indices par question ?
         //RéponsesPossibles est une liste de réponses séparées par des points-virgules
         //
         //La première question (ID=1) est une question test pour vérifier que tout fonctionne bien. Cette question est utilisée dans les fonctions de tests
@@ -227,7 +237,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         int niveau = joueur.score;
         return 1;
     }
-
 
     int[] tableauPoids() {
         //Utilise les stats du joueur pour retourner un tableau de poids pour chaque question
