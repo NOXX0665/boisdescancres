@@ -3,8 +3,8 @@ import extensions.CSVFile;
 
 class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA CLASSE ICI ET DANS LE run.sh !!!
     Joueur joueur;
-    Joueur joueur;
     final String CHEMIN_QUESTIONS = "ressources/questions.csv";
+    final String CHEMIN_SAUVEGARDES = "ressources/sauvegardes/";
 
     void algorithm() {
         //Menu d'accueil
@@ -19,8 +19,8 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
             println("Quelle sauvegarde voulez-vous charger ?");
             afficherListeSave();
             print("> ");
-            int choixSave = readInt();
-            joueur=chargerJoueur(choixSave); //à faire
+            String choixSave = readString();
+            joueur=chargerJoueur(choixSave+".csv");
         } else if (choix==1) {
             joueur=creerJoueur();
         } else {
@@ -29,7 +29,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
             System.exit(0); //Est-ce qu'on a le droit d'utiliser System.exit() ?
         }
 
-        if (joueur.score==1) {
         if (joueur.score==1) {
             println("C'est parti pour le niveau Facile !");
         } else if (joueur.score==2) {
@@ -53,10 +52,21 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
                 int idQuestion = questionAleatoire(); //à faire
 
                 //On pose la question et on vérifie si la réponse est bonne
-                boolean bonneReponse = poserQuestion(idQuestion); //en cours
+                boolean bonneReponse = poserQuestion(idQuestion);
             } else if (equals(reponse, "2")) {
                 //Affichage des statistiques du joueur
-                print("L'affichage des statistiques n'est pas encore implémenté.");
+                afficherStatistiques();
+                println("\n"); //Pour aérer un peu
+
+                //On demande s'il veut voir ses stats avancées
+                println("Que souhaitez-vous faire ?\n1. Voir des statistique plus précises sur les questions\n2. Revenir au jeu");
+                print("> ");
+                reponse = readString();
+                if (equals(reponse, "1")) {
+                    afficherStatAvancee();
+                    println("Appuyez sur Entrée pour revenir au jeu.");
+                    readString();
+                }
             }
 
             //Menu du jeu :
@@ -70,41 +80,9 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Sauvegarde et quitter
         println("Sauvegarde en cours...");
-        delay(1000); //Il faut faire la fonction de sauvegarde
-        delay(1000); //Il faut faire la fonction de sauvegarde
+        saveJoueur(joueur, joueur.nom+".csv");
         println("Partie sauvegardée. Au revoir !");
     }
-
-
-    boolean poserQuestion(int idQuestion) {
-        //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
-        print("Question n°"+idQuestion+": ");
-        println(getQuestion(idQuestion)+"\n\n");
-        }
-
-        boolean reponseValide = false; //Une réponse valide est soit une bonne réponse, soit un indice, soit un passage de question (dans les deux derniers cas, c'est true seulement si le joueur a assez de points bonus)
-
-        while (!reponseValide) {
-            reponseValide = demanderReponse(idQuestion);
-        }
-
-        return true;
-    }
-
-    boolean demanderReponse(int idQuestion) {
-        //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
-        print("Votre réponse > ");
-        String reponse = readString();
-        if (estBonneReponse(idQuestion, reponse)) { //Si c'est une bonne réponse
-            println("Bonne réponse !");
-            return true;
-        } else { //Si ce n'est pas la bonne réponse
-            println("Mauvaise réponse...");
-            println("La bonne réponse était : "+getReponses(1)[0]);
-            return false;
-        }
-    }
-
 
     boolean poserQuestion(int idQuestion) {
         //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
@@ -114,7 +92,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         if (joueur.pointsBonus>0) {
             println("Il vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.");
-            (Système des points bonus)
         }
 
         boolean reponseValide = false; //Une réponse valide est soit une bonne réponse, soit un indice, soit un passage de question (dans les deux derniers cas, c'est true seulement si le joueur a assez de points bonus)
@@ -130,14 +107,17 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
         print("Votre réponse > ");
         String reponse = readString();
+        joueur.stats_questions[idQuestion-1][0]++; //On incrémente le compteur de rencontres de la question
         if (estBonneReponse(idQuestion, reponse)) { //Si c'est une bonne réponse
             println("Bonne réponse !");
-            return true;
             ajouterPointsBonus(idQuestion);
+            joueur.score++;
+            joueur.stats_questions[idQuestion-1][1]++; //On incrémente le compteur de réussites de la question
             return true;
         } else if (equals(reponse, "passer")) { //Si le joueur veut passer la question
             if (joueur.pointsBonus>0) {
                 println("Vous avez passé la question.");
+                joueur.stats_questions[idQuestion-1][2]++;
                 joueur.pointsBonus--;
                 return true;
             } else {
@@ -147,8 +127,9 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         } else if (equals(reponse, "indice")) { //Si le joueur veut un indice
             if (joueur.pointsBonus>0) {
                 println("Indice : "+getIndices(idQuestion));
+                //Pas besoins d'incrémenter le compteur d'indices dans les stats car on peut le calculer avec les autres stats
                 joueur.pointsBonus--;
-                return true;
+                return false;
             } else {
                 println("Vous n'avez pas assez de points bonus pour demander un indice.");
                 return false;
@@ -156,7 +137,8 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         } else { //Si ce n'est pas la bonne réponse
             println("Mauvaise réponse...");
             println("La bonne réponse était : "+getReponses(1)[0]);
-            return false;
+            joueur.stats_questions[idQuestion-1][3]++;
+            return true;
         }
     }
 
@@ -278,12 +260,12 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
     void afficherListeSave() {
         //Doit afficher tout le contenu du dossier de sauvegarde
-        String[] tabFichiers = getAllFilesFromDirectory("ressources/saves");
+        String[] tabFichiers = getAllFilesFromDirectory(CHEMIN_SAUVEGARDES);
         if (length(tabFichiers)==0) {
             println("Aucune sauvegarde trouvée. Veuillez commencer une nouvelle partie.");
         }
         for (int i=0; i<length(tabFichiers); i++) {
-            println(tabFichiers[i]);
+            println(substring(tabFichiers[i],0,length(tabFichiers[i])-4));
         }
     }
 
@@ -296,7 +278,8 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
         //Il faudrait se mettre d'accord sur combien de points il faut pour chaque niveau
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
-        return newJoueur(nom, niveau, 3, new int[4][2]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment vu qu'il y aura de plus en plus de stats ?
+        int nbQuestions = rowCount(loadCSV(CHEMIN_QUESTIONS));
+        return newJoueur(nom, niveau, 3, new int[nbQuestions-1][5]); //Quelle taille pour le tableau d'un nouveau joueur ? Est-ce qu'il nous faudra une fonction pour agrandir le tableau au bout d'un moment vu qu'il y aura de plus en plus de stats ?
     }
 
     Joueur newJoueur(String nom, int score, int pointsBonus, int[][] stats_questions) {
@@ -309,16 +292,16 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     }
 //A vérifier
     Joueur chargerJoueur(String nomFichier) {
-        CSVFile fichier = loadCSVFile(nomFichier);
-        int nom = getCell(fichier,0,0);
-        int score = getCell(fichier,0,1);
-        int pointsBonus = getCell(fichier,0,2);
+        CSVFile fichier = loadCSV(CHEMIN_SAUVEGARDES+"/"+nomFichier);
+        String nom = getCell(fichier,0,0);
+        int score = stringToInt(getCell(fichier,0,1));
+        int pointsBonus = stringToInt(getCell(fichier,0,2));
         //Création d'un tableau de 5 colonnes (pour l'id et les 4 stats) et d'autant de lignes que de questions
         int[][] stats_questions = new int[rowCount(fichier)-1][5];
         // Colonne 0 : id de la question | Colonne 1 : Nombre de fois où elle est tombée | 2 : Nb de fois réussie | 3 : Nb de fois skip | 4 : nbFois Ratée
-        for(int ligne = 1; ligne <= rowCount(fichier); ligne++){
+        for(int ligne = 1; ligne < rowCount(fichier); ligne++){
             for(int colonne = 0; colonne < 5; colonne++){
-                stats_questions[ligne][colonne] = stringToInt(getCell(fichier,ligne,colonne));
+                stats_questions[ligne-1][colonne] = stringToInt(getCell(fichier,ligne,colonne));
             }
         }
         return newJoueur(nom,score,pointsBonus,stats_questions);
@@ -332,16 +315,16 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     }
 //A vérifier
     void saveJoueur(Joueur joueur, String nomFichier) {
-        String[][] saveString = new String[length(joueur.stats_questions,1)][5];
+        String[][] saveString = new String[length(joueur.stats_questions,1)+1][5];
         saveString[0][0] = joueur.nom;
         saveString[0][1] = "" + joueur.score;
         saveString[0][2] = "" + joueur.pointsBonus;
-        for(int ligne = 1; ligne <= length(joueur.stats_questions,1); ligne++){
+        for(int ligne = 0; ligne < length(joueur.stats_questions,1); ligne++){
             for(int colonne = 0; colonne < 5; colonne++){
-                saveString[ligne][colonne] = joueur.stats_questions[ligne][colonne];
+                saveString[ligne+1][colonne] = ""+joueur.stats_questions[ligne][colonne];
             }
         }
-        saveCSV(saveString,nomFichier);
+        saveCSV(saveString,"ressources/sauvegardes/"+nomFichier);
     }
 
     //Squelette questions dans le fichier save :
@@ -349,7 +332,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
 
 //A vérifier
-    void afficherStatistiques(Joueur joueur){
+    void afficherStatistiques(){
         println("Vos statistiques :");
         println("Votre pseudo : " + joueur.nom);
         println("Votre score : " + joueur.score);
@@ -357,16 +340,19 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         println("Votre nombre de points bonus : " + joueur.pointsBonus);
     }
 //A verifier
-    void afficherStatAvancee(Joueur joueur){
-        println("Voici vos statistiques pour chacune des questions implémentées :")
+    void afficherStatAvancee(){
+        println("Voici vos statistiques pour chacune des questions implémentées :");
         for(int i = 0; i < length(joueur.stats_questions,1); i++){
-            println("Question numéro " + i + " : ");
+            println("\nQuestion numéro " + i + " : ");
             println("   Nombre de fois rencontrée : " + joueur.stats_questions[i][0]);
             println("   Nombre de fois réussie : " + joueur.stats_questions[i][1]);
             println("   Nombre de fois que vous l'avez passée : " + joueur.stats_questions[i][2]);
             println("   Nombre de fois ratée : " + joueur.stats_questions[i][3]);
         }
     }
+
+
+
     /////////////////////////////////////
     // Fonctions pour les points bonus //
     /////////////////////////////////////
