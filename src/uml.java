@@ -24,7 +24,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         } else if (choix==1) {
             joueur=creerJoueur();
         } else {
-            //Je suis pas fière de moi là dessus, faudrait trouver une meilleure solution qui dit
+            //Je suis pas fière de moi là dessus, faudrait trouver une meilleure solution
             println("Choix invalide. Veuillez redémarrer le jeu et choisir 1 ou 2.");
             System.exit(0); //Est-ce qu'on a le droit d'utiliser System.exit() ?
         }
@@ -290,7 +290,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         j.stats_questions = stats_questions;
         return j;
     }
-//A vérifier
+
     Joueur chargerJoueur(String nomFichier) {
         CSVFile fichier = loadCSV(CHEMIN_SAUVEGARDES+"/"+nomFichier);
         String nom = getCell(fichier,0,0);
@@ -313,7 +313,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         //à remplir
         return 1;
     }
-//A vérifier
+
     void saveJoueur(Joueur joueur, String nomFichier) {
         String[][] saveString = new String[length(joueur.stats_questions,1)+1][5];
         saveString[0][0] = joueur.nom;
@@ -329,8 +329,6 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
 
     //Squelette questions dans le fichier save :
     //id,nbRencontree,nbReussie,nbSkip,nbRatee
-
-
 
     void afficherStatistiques(){
         println("Vos statistiques :");
