@@ -331,7 +331,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
     //id,nbRencontree,nbReussie,nbSkip,nbRatee
 
 
-//A vérifier
+
     void afficherStatistiques(){
         println("Vos statistiques :");
         println("Votre pseudo : " + joueur.nom);
@@ -339,7 +339,7 @@ class BoisDesCancres2 extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA
         // Quand on se sera mis d'accord sur l'xp nécessaire pour monter de niveau, on pourra rajouter un affichage du niveau et de l'avancement avant le prochain avec les petits carrés ☐ et ■
         println("Votre nombre de points bonus : " + joueur.pointsBonus);
     }
-//A verifier
+
     void afficherStatAvancee(){
         println("Voici vos statistiques pour chacune des questions implémentées :");
         for(int i = 0; i < length(joueur.stats_questions,1); i++){
