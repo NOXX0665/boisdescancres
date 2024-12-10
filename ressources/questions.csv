@@ -1,9 +1,9 @@
 id,difficulté,question,liste_reponses,indice
-1,1,Ceci est une question test les réponses disponibles sont A B ou C,a;b;c,Les réponses sont A B ou C
-2,1,Eh toi comment tu dis “bonjour” en anglais steuplé ?,hello,Voici un indice
-3,1,Comment dit-on "je" en anglais ?,i,Voici un indice
-4,1,Comment dit-on "tu" ou "vous" en anglais ?,you,Voici un indice
-5,1,Comment dit-on "il" en anglais ?,he,Voici un indice
-6,1,Comment dit-on "elle" en anglais ?,she,Voici un indice
-7,1,Comment dit-on "ils" ou "elles" en anglais ?,they,Voici un indice
-8,3,Comment dit-on “pêcheur” en anglais ?,fisherman;fisher;angler,Voici un indice
+1,1,Ceci est une question test les réponses disponibles sont A B ou C,a;1;b;1;c;1,Les réponses sont A B ou C
+2,1,Eh toi comment tu dis “bonjour” en anglais steuplé ?,hello;1,Voici un indice
+3,1,Comment dit-on "je" en anglais ?,i;1,Voici un indice
+4,1,Comment dit-on "tu" ou "vous" en anglais ?,you;1,Voici un indice
+5,1,Comment dit-on "il" en anglais ?,he;1,Voici un indice
+6,1,Comment dit-on "elle" en anglais ?,she;1,Voici un indice
+7,1,Comment dit-on "ils" ou "elles" en anglais ?,they;1,Voici un indice
+8,3,Comment dit-on “pêcheur” en anglais ?,fisherman;1;fisher;1;angler;1,Voici un indice
