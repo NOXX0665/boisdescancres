@@ -10,75 +10,85 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         //Menu d'accueil
         //On demande au joueur s'il veut commencer une nouvelle partie ou charger une sauvegarde
         afficherImage("ressources/ascii_art/logo.txt");
-        println("Bienvenue dans le Bois Des Cancres !");
-        println("1. Nouvelle partie");
-        println("2. Ouvrir une sauvegarde");
-        print("> ");
-        int choix = readInt();
-        if (choix==2) {
-            println("Quelle sauvegarde voulez-vous charger ?");
-            afficherListeSave();
+        
+        boolean valide = false;
+        String choix = "";
+        while(!valide){
+            println("Bienvenue dans le Bois Des Cancres !");
+            println("1. Nouvelle partie");
+            println("2. Ouvrir une sauvegarde");
+            println("3. Quitter le jeu");
             print("> ");
-            String choixSave = readString();
-            joueur=chargerJoueur(choixSave+".csv");
-        } else if (choix==1) {
-            joueur=creerJoueur();
-        } else {
-            //Je suis pas fière de moi là dessus, faudrait trouver une meilleure solution
-            println("Choix invalide. Veuillez redémarrer le jeu et choisir 1 ou 2.");
-            System.exit(0); //Est-ce qu'on a le droit d'utiliser System.exit() ?
+            choix = readString();
+            if(equals(choix,"3")){
+                System.exit(0);
+            }
+            else if (equals(choix,"2")) {
+                println("Quelle sauvegarde voulez-vous charger ?");
+                afficherListeSave();
+                print("> ");
+                String choixSave = readString();
+                joueur=chargerJoueur(choixSave+".csv");
+                valide = true;
+            } 
+            else if (equals(choix,"1")) {
+                joueur=creerJoueur();
+            } 
+            else{
+                println("Entrée invalide, veuillez réessayer : ");
+            }
         }
 
         if (joueur.score==1) {
             println("C'est parti pour le niveau Facile !");
         } else if (joueur.score==2) {
-        } else if (joueur.score==2) {
             println("C'est parti pour le niveau Moyen !");
-        } else if (joueur.score==3) {
         } else if (joueur.score==3) {
             println("C'est parti pour le niveau Difficile !");
         } else if (joueur.score==4) {
-        } else if (joueur.score==4) {
             println("C'est parti pour le niveau Très Difficile !");
         }
+        print("test");
         delay(1000);
 
-        String reponse = "1";
-
-        while (!equals(reponse, "3")) {
-            clearScreen();
-            if (equals(reponse, "1")) {
-                //Choix d'une question basée sur le niveau du joueur
-                Question question = questionAleatoire(); //à faire
-                println("====DEBUG====");
-                print(toString(joueur.listeQuestions));
-                println(toString(question));
+        choix = "-1";
+        print("ouais ?");
+        while (!equals(choix, "3")) {
+            //Menu du jeu :
+                println("\n\nQue voulez-vous faire ?");
+                println("1. Continuer votre chemin");
+                println("2. Regarder vos statistiques");
+                println("3. Sauvegarder et quitter");
+                print("> ");
+            choix = readString();
+            if (equals(choix, "1")) {
+                //Choix d'une question parmis toutes les questions dans le fichier ../ressources/questions.csv
+                Question question = questionAleatoire(tousLesId()); //à améliorer
+                // println("====DEBUG====");
+                // print(toString(joueur.listeQuestions));
+                // println(toString(question));
 
                 //On pose la question et on vérifie si la réponse est bonne
                 boolean bonneReponse = poserQuestion(question);
-            } else if (equals(reponse, "2")) {
+            } else if (equals(choix, "2")) {
                 //Affichage des statistiques du joueur
                 afficherStatistiques();
                 println("\n"); //Pour aérer un peu
 
                 //On demande s'il veut voir ses stats avancées
-                println("Que souhaitez-vous faire ?\n1. Voir des statistique plus précises sur les questions\n2. Revenir au jeu");
+                println("Que souhaitez-vous faire ?");
+                println("1. Voir des statistique plus précises sur les questions");
+                println("2. Revenir au jeu");
                 print("> ");
-                reponse = readString();
-                if (equals(reponse, "1")) {
+                choix = readString();
+                if (equals(choix, "1")) {
                     afficherStatAvancee();
                     println("Appuyez sur Entrée pour revenir au jeu.");
                     readString();
                 }
             }
 
-            //Menu du jeu :
-            println("\n\nQue voulez-vous faire ?");
-            println("1. Continuer votre chemin");
-            println("2. Regarder vos statistiques");
-            println("3. Sauvegarder et quitter");
-            print("> ");
-            reponse = readString();
+            
         }
 
         //Sauvegarde et quitter
@@ -170,7 +180,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         // int nbSkip;
         // int nbRatee;
 
-    Question[] initToutesQuestions(String nomJoueur) {
+    Question[] initToutesQuestions(String nomJoueur) { 
         //Initialise toutes les questions du jeu dans une liste de type Question
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
         int nbQuestions = rowCount(fichier);
@@ -273,11 +283,34 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         assertEquals("Jean", tab[3]);
     }
 
-    Question questionAleatoire() {
-        //Retourne l'ID d'une question aléatoire en fonction du niveau du joueur
-        int niveau = joueur.score;
-        int idQuestion = (int)random()*rowCount(loadCSV(CHEMIN_QUESTIONS))+1;
-        return joueur.listeQuestions[0];
+    // A vérifier
+    Question questionAleatoire(int[] id_pool) {
+        //Retourne l'ID d'une question aléatoire dans la liste des id "id_pool"
+        int idQuestion = -1;
+        boolean valide = false;
+        int i = 0;
+        //boucles while imbriquées pour tirer une valeur aléatoire parmis toutes les questions, puis tester si elle est 
+        //dans la liste des id "id_pool"
+        while(!valide){
+            idQuestion = (int)(random()*rowCount(loadCSV(CHEMIN_QUESTIONS))+1);
+            while(idQuestion != id_pool[i] && i < length(id_pool)-1){
+                i++;
+            }
+            if(idQuestion==id_pool[i]){
+                valide = true;
+            }
+            i = 0;
+        }
+        return joueur.listeQuestions[idQuestion];
+    }
+    int[] tousLesId(){
+        int[] result = new int[rowCount(loadCSV(CHEMIN_QUESTIONS))];
+        for(int i = 0 ; i < length(result); i++){
+            result[i] = i;
+        }
+        return result;
+        // Pour tester que "questionAleatoire" choisisse bien dans une liste d'id, commentez la ligne d'au dessus, et décommentez celle d'en dessous.
+        // return new int[]{2,3,4};
     }
 
     int[] tableauPoids() {
@@ -285,6 +318,8 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         //A faire
         return new int[1];
     }
+
+    
 
     int coeffReponse(Question question, String reponse) {
         //Cette fonction retourne -1 si la réponse est fausse, sinon elle retourne le coefficient de la réponse
