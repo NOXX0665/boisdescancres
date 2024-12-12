@@ -12,7 +12,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         afficherImage("ressources/ascii_art/logo.txt");
         
         boolean valide = false;
-        String choix = "fds";
+        String choix = "";
         println(choix);
         while(!valide){
             println("Bienvenue dans le Bois Des Cancres !");
@@ -21,6 +21,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
             println("3. Quitter le jeu");
             print("> ");
             choix = readString();
+            
             if(equals(choix,"3")){
                 System.exit(0);
             }
@@ -82,11 +83,17 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         println("Partie sauvegardée. Au revoir !");
     }
 
+
+    ////////////////////////////////////////////
+    // Fonctions pour les menus et l'interface //
+    ////////////////////////////////////////////
+
+
     boolean menuChargerSave() {
         println("Quelle sauvegarde voulez-vous charger ?");
         afficherListeSave();
         print("> ");
-        String choixSave = readString();
+        String choixSave = toLowerCase(readString());
         joueur=chargerJoueur(choixSave+".csv");
         return true;
     }
@@ -125,9 +132,9 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
         print("Votre réponse > ");
         String reponse = readString();
-        println(toString(question));
         question.nbRencontree++;
         if (!(coeffReponse(question, reponse)==-1)) { //Si c'est une bonne réponse
+            clearScreen();
             println("Bonne réponse !");
             ajouterPointsBonus(question);
             joueur.score++;
@@ -167,7 +174,6 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
     ////////////////////////////////////////////
 
         //Schéma de questions.csv :
-        //ID,Difficulté,Question,RéponsesPossibles,Indice(s)   //Est-ce qu'on devrait faire plusieurs indices par question ?
         //ID,Difficulté,Question,RéponsesPossibles,Indice(s)   //Est-ce qu'on devrait faire plusieurs indices par question ?
         //RéponsesPossibles est une liste de réponses avec leurs coefficients séparées par des points-virgules dans ce schéma :
         //Réponse1;Coefficient1;Réponse2;Coefficient2;Réponse3,Coefficient3 ...
@@ -287,7 +293,6 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         assertEquals("Jean", tab[3]);
     }
 
-    // A vérifier
     Question questionAleatoire(int[] id_pool) {
         //Retourne l'ID d'une question aléatoire dans la liste des id "id_pool"
         int idQuestion = -1;
@@ -379,16 +384,28 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
             println("Aucune sauvegarde trouvée. Veuillez commencer une nouvelle partie.");
         }
         for (int i=0; i<length(tabFichiers); i++) {
-            println(substring(tabFichiers[i],0,length(tabFichiers[i])-4));
+            CSVFile fichier = loadCSV(CHEMIN_SAUVEGARDES+"/"+tabFichiers[i]);
+            println(getCell(fichier,0,0));
         }
     }
 
     Joueur creerJoueur() {
         print("Quel est votre nom ?\n> ");
         String nom = readString();
-        println("Bienvenue, "+nom+", quel niveau pensez-vous avoir en Anglais ?\n1. Mauvais\n2. Moyen\n3. Bon\n4. Très bon");
-        print("> ");
-        int niveau = readInt();
+        clearScreen();
+
+        boolean valide = false;
+        String niveauString = "";
+        while(!valide){
+            clearScreen();
+            println("Bienvenue, "+nom+", quel niveau pensez-vous avoir en Anglais ?\n1. Mauvais\n2. Moyen\n3. Bon\n4. Très bon");
+            print("> ");
+            niveauString = readString();
+            if(equals(niveauString,"1") || equals(niveauString,"2") || equals(niveauString,"3") || equals(niveauString,"4")){
+                valide = true;
+            }
+        }
+        int niveau = stringToInt(niveauString);
 
         //Il faudrait se mettre d'accord sur combien de points il faut pour chaque niveau
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
@@ -438,7 +455,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
             saveString[ligne+1][3] = ""+questions[ligne].nbSkip;
             saveString[ligne+1][4] = ""+questions[ligne].nbRatee;
         }
-        saveCSV(saveString,"ressources/sauvegardes/"+nomFichier);
+        saveCSV(saveString,"ressources/sauvegardes/"+toLowerCase(nomFichier)); //On passe le nom du fichier en minuscules
     }
 
     //Squelette questions dans le fichier save :
@@ -476,7 +493,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         double proba = probaPoint(question);
         if (random()<proba) {
             joueur.pointsBonus++;
-            println("Vous avez gagné un point bonus !\nIl peut vous servir à passer une question ou à demander un indice.");
+            println("\nVous avez gagné un point bonus !\nIl peut vous servir à passer une question ou à demander un indice.");
         }
     }
 
