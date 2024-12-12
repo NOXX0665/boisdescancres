@@ -15,5 +15,5 @@ id,difficulté,question,liste_reponses,indice
 14,3,Comment dit-on "courir" en anglais ?,run;1,Ce que tu fais pour te déplacer vite.
 15,4,Quel est le passé du verbe "to be" ?,was;1;were;1,Utilisé pour parler du passé.
 16,4,Comment dit-on "je vais à l’école" en anglais ?,i go to school;1,Une phrase complète.
-17,4,Comment dit-on "j’aime lire des livres" en anglais ?,i love reading books;1,Une phrase complète pour parler de loisir.
+17,4,Comment dit-on "j’aime lire des livres" en anglais ?,i love reading books;1;i like reading books;0.5,Une phrase complète pour parler de loisir.
 18,4,Quel mot anglais désigne un oiseau qui vole la nuit et dit "hoot" ?,owl;1,C'est un animal nocturne.
