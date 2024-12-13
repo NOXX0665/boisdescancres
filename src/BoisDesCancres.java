@@ -330,6 +330,18 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         return result;
     }
 
+    int[] questionRevisions(Joueur joueur){
+        //Renvoie la liste des questions qui on été ratée ou passée + de fois qu'elle n'ont été réussies
+        CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
+        int[] result = new int[rowCount(fichier)-1];
+        for(int i = 1 ; i < length(result); i++){
+            if(stringToInt(getCell(fichier,i,2)) > (stringToInt(getCell(fichier,i,3)) + stringToInt(getCell(fichier,i,4)))){
+                result[i] = i;
+            }
+        }
+        return result;
+    }
+
     
 
     
