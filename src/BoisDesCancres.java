@@ -12,49 +12,37 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         afficherImage("ressources/ascii_art/logo.txt");
         
         boolean valide = false;
-        String choix = "";
-        println(choix);
-        while(!valide){
-            println("Bienvenue dans le Bois Des Cancres !");
-            println("1. Nouvelle partie");
-            println("2. Ouvrir une sauvegarde");
-            println("3. Quitter le jeu");
-            print("> ");
-            choix = readString();
-            
-            if(equals(choix,"3")){
-                System.exit(0);
-            }
-            else if (equals(choix,"2")) {
-                valide = menuChargerSave();
-            } 
-            else if (equals(choix,"1")) {
-                joueur=creerJoueur();
-                valide=true;
-            } 
-            else{
-                println("Entrée invalide, veuillez réessayer : ");
-            }
-        }
 
+        println("Bienvenue dans le Bois Des Cancres !");
+        println("1. Nouvelle partie");
+        println("2. Ouvrir une sauvegarde");
+        println("3. Quitter le jeu");
+        String choix = demanderValeur(new String[]{"1","2","3"});
+            
+        if (choix.equals("3")) {
+            System.exit(0);
+        } else if (choix.equals("2")) {
+            menuChargerSave();
+        } else if (choix.equals("1")) {
+            joueur=creerJoueur();
+        }
+        
         // On affiche un message du type "C'est parti pour le niveau {niveau du joueur}"
         String[] listeNiveaux = new String[]{"Facile", "Moyen", "Difficile", "Très Difficile"};
         println("C'est parti pour le niveau "+listeNiveaux[joueur.niveau-1]+" !");
-
         delay(1000);
 
         choix = "-1";
 
         println("\n\n\nVous vous réveillez dans une étrange forêt... LALALA CONTEXTE ICI");
 
-        while (!equals(choix, "3")) {
+        while (!equals(choix, "3")) { //Si le choix=3, cela veut dire que le joueur veut sauvegarder et quitter.
             //Menu du jeu :
-                println("\n\nQue voulez-vous faire ?");
-                println("1. Continuer votre chemin");
-                println("2. Regarder vos statistiques");
-                println("3. Sauvegarder et quitter");
-                print("> ");
-            choix = readString();
+            println("\n\nQue voulez-vous faire ?");
+            println("1. Continuer votre chemin");
+            println("2. Regarder vos statistiques");
+            println("3. Sauvegarder et quitter");
+            choix = demanderValeur(new String[]{"1","2","3"});
 
             if (equals(choix, "1")) {
                 //Choix d'une question parmis toutes les questions dans le fichier ../ressources/questions.csv
@@ -89,14 +77,13 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
     ////////////////////////////////////////////
 
 
-    boolean menuChargerSave() {
+    void menuChargerSave() {
         clearScreen();
         println("Quelle sauvegarde voulez-vous charger ?");
         afficherListeSave();
         print("> ");
-        String choixSave = toLowerCase(readString());
+        String choixSave = toLowerCase(demanderValeur(getAllFilesFromDirectory(CHEMIN_SAUVEGARDES)));
         joueur=chargerJoueur(choixSave+".csv");
-        return true;
     }
 
     void menuStats(Joueur joueur) {
@@ -110,7 +97,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         println("1. Voir des statistique plus précises sur les questions");
         println("2. Revenir au jeu");
         print("> ");
-        String choix = readString();
+        String choix = demanderValeur(new String[]{"1","2"});
         if (equals(choix, "1")) {
             afficherStatAvancee();
             println("\nAppuyez sur Entrée pour revenir au jeu.");
@@ -133,7 +120,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
     boolean demanderReponse(Question question) {
         //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
         print("Votre réponse > ");
-        String reponse = readString();
+        String reponse = readString(); //On ne peut pas utiliser demanderValeur()
         question.nbRencontree++;
         if (!(coeffReponse(question, reponse)==-1)) { //Si c'est une bonne réponse
             clearScreen();
@@ -400,14 +387,12 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         boolean valide = false;
         String niveauString = "";
         int score = 0;
-        while(!valide){
-            clearScreen();
-            println("Bienvenue, "+nom+", quel niveau pensez-vous avoir en Anglais ?\n1. Mauvais\n2. Moyen\n3. Bon\n4. Très bon");
-            print("> ");
-            niveauString = readString();
-            if(equals(niveauString,"1") || equals(niveauString,"2") || equals(niveauString,"3") || equals(niveauString,"4")){
-                valide = true;
-            }
+
+        clearScreen();
+        println("Bienvenue, "+nom+", quel niveau pensez-vous avoir en Anglais ?\n1. Mauvais\n2. Moyen\n3. Bon\n4. Très bon");
+        niveauString = demanderValeur(new String[]{"1","2","3","4"});
+        if(equals(niveauString,"1") || equals(niveauString,"2") || equals(niveauString,"3") || equals(niveauString,"4")){
+            valide = true;
         }
         int niveau = stringToInt(niveauString);
 
@@ -452,6 +437,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         saveString[0][0] = joueur.nom;
         saveString[0][1] = "" + joueur.score;
         saveString[0][2] = "" + joueur.pointsBonus;
+        saveString[0][3] = "" + joueur.niveau;
 
         Question[] questions = joueur.listeQuestions;
         for(int ligne = 0; ligne < length(questions); ligne++){
@@ -518,6 +504,40 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
 
     /////////////////////////////////////
+
+    int demanderValeur(int[] valeursPossibles) {
+        //Demande une valeur à l'utilisateur et vérifie si elle est dans le tableau de valeurs possibles
+        boolean valide = false;
+        String valeur = "";
+        while (!valide) {
+            print("Votre choix > ");
+            valeur = readString();
+            for (int i=0; i<length(valeursPossibles); i++) {
+                valide = valide || equals(valeur, ""+valeursPossibles[i]);
+            }
+            if (!valide) {
+                println("\n\nValeur invalide. Veuillez réessayer.");
+            }
+        }
+        return stringToInt(valeur);
+    }
+
+    String demanderValeur(String[] valeursPossibles) {
+        //Demande une valeur à l'utilisateur et vérifie si elle est dans le tableau de valeurs possibles
+        String valeur = "";
+        boolean valide = false;
+        while (!valide) {
+            print("Votre choix > ");
+            valeur = readString();
+            for (int i=0; i<length(valeursPossibles); i++) {
+                valide = valide || equals(valeur, valeursPossibles[i]);
+            }
+            if (!valide) {
+                println("Valeur invalide. Veuillez réessayer.");
+            }
+        }
+        return valeur;
+    }
 
     void afficherImage(String chemin){
         //Affiche une image en ASCII art et supprime le contenu de la console.
