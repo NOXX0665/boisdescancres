@@ -39,7 +39,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
         // On affiche un message du type "C'est parti pour le niveau {niveau du joueur}"
         String[] listeNiveaux = new String[]{"Facile", "Moyen", "Difficile", "Très Difficile"};
-        println("C'est parti pour le niveau "+listeNiveaux[joueur.score-1]+" !");
+        println("C'est parti pour le niveau "+listeNiveaux[joueur.niveau-1]+" !");
 
         delay(1000);
 
@@ -90,6 +90,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
 
     boolean menuChargerSave() {
+        clearScreen();
         println("Quelle sauvegarde voulez-vous charger ?");
         afficherListeSave();
         print("> ");
@@ -99,6 +100,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
     }
 
     void menuStats(Joueur joueur) {
+        clearScreen();
         //Affichage des statistiques du joueur
         afficherStatistiques();
         println("\n"); //Pour aérer un peu
@@ -111,7 +113,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         String choix = readString();
         if (equals(choix, "1")) {
             afficherStatAvancee();
-            println("Appuyez sur Entrée pour revenir au jeu.");
+            println("\nAppuyez sur Entrée pour revenir au jeu.");
             readString();
         }
     }
@@ -330,14 +332,14 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
     
 
-    int coeffReponse(Question question, String reponse) {
+    double coeffReponse(Question question, String reponse) {
         //Cette fonction retourne -1 si la réponse est fausse, sinon elle retourne le coefficient de la réponse
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
-        int coeff = -1;
+        double coeff = -1;
         String[][] reponses = question.reponses;
         for (int i=0; i<length(reponses,1); i++) {
             if (equals(reponses[i][0], toLowerCase(reponse))) {
-                coeff = stringToInt(reponses[i][1]);
+                coeff = stringToDouble(reponses[i][1]);
             }
         }
         return coeff;
@@ -396,6 +398,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
         boolean valide = false;
         String niveauString = "";
+        int score = 0;
         while(!valide){
             clearScreen();
             println("Bienvenue, "+nom+", quel niveau pensez-vous avoir en Anglais ?\n1. Mauvais\n2. Moyen\n3. Bon\n4. Très bon");
@@ -411,13 +414,14 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
         int nbQuestions = rowCount(loadCSV(CHEMIN_QUESTIONS));
         Question[] listeQuestions = initToutesQuestions("nouveau"); //On passe "nouveau" pour dire qu'on crée un nouveau joueur. Sinon, la fonction chercherait des stats pour un joueur dans un fichier qui n'existe pas.
-        return newJoueur(nom, niveau, 3, listeQuestions);
+        return newJoueur(nom, score, niveau, 3, listeQuestions);
     }
 
-    Joueur newJoueur(String nom, int score, int pointsBonus, Question[] listeQuestions) {
+    Joueur newJoueur(String nom, int score, int niveau, int pointsBonus, Question[] listeQuestions) {
         Joueur j = new Joueur();
         j.nom = nom;
         j.score = score;
+        j.niveau = niveau;
         j.pointsBonus = pointsBonus;
         j.listeQuestions = listeQuestions;
         return j;
@@ -428,10 +432,11 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         String nom = getCell(fichier,0,0);
         int score = stringToInt(getCell(fichier,0,1));
         int pointsBonus = stringToInt(getCell(fichier,0,2));
+        int niveau = stringToInt(getCell(fichier,0,3));
         //Création d'un tableau de 5 colonnes (pour l'id et les 4 stats) et d'autant de lignes que de questions
         Question[] listeQuestions = initToutesQuestions(nom);
         // Colonne 0 : id de la question | Colonne 1 : Nombre de fois où elle est tombée | 2 : Nb de fois réussie | 3 : Nb de fois skip | 4 : nbFois Ratée
-        return newJoueur(nom,score,pointsBonus,listeQuestions);
+        return newJoueur(nom,score, niveau, pointsBonus,listeQuestions);
     }
 
 
@@ -465,7 +470,8 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         println("Vos statistiques :");
         println("Votre pseudo : " + joueur.nom);
         println("Votre score : " + joueur.score);
-        // Quand on se sera mis d'accord sur l'xp nécessaire pour monter de niveau, on pourra rajouter un affichage du niveau et de l'avancement avant le prochain avec les petits carrés ☐ et ■
+        // Quand on se sera mis d'accord sur l'xp nécessaire pour monter de niveau, on pourra rajouter un affichage de l'avancement avant le prochain avec les petits carrés ☐ et ■
+        println("Votre niveau : " + joueur.niveau);
         println("Votre nombre de points bonus : " + joueur.pointsBonus);
     }
 
@@ -473,12 +479,15 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         Question[] questions = joueur.listeQuestions;
         println("Voici vos statistiques pour chacune des questions implémentées :");
         for(int i = 0; i < length(questions); i++){
-            println("\nQuestion numéro " + i + " : ");
-            println("   Nombre de fois rencontrée : " + questions[i].nbRencontree);
-            println("   Nombre de fois réussie : " + questions[i].nbReussie);
-            println("   Nombre de fois que vous l'avez passée : " + questions[i].nbSkip);
-            println("   Nombre de fois ratée : " + questions[i].nbRatee);
+            if (questions[i].nbRencontree!=0) { //On affiche seulement les questions qui ont été rencontrées
+                println("\nQuestion numéro " + i + " : ");
+                println("   Nombre de fois rencontrée : " + questions[i].nbRencontree);
+                println("   Nombre de fois réussie : " + questions[i].nbReussie);
+                println("   Nombre de fois que vous l'avez passée : " + questions[i].nbSkip);
+                println("   Nombre de fois ratée : " + questions[i].nbRatee);
+            }
         }
+        println("\nLes questions non affichées n'ont pas encore été rencontrées.");
     }
 
 
