@@ -57,6 +57,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
                 while (!reponseValide) {
                     reponseValide = demanderReponse(question);
                 }
+                joueur.niveau = scoreIntoNiveau(joueur.score);
                 
             } else if (equals(choix, "2")) {
                 menuStats(joueur);
@@ -331,6 +332,8 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
     
 
+    
+
     double coeffReponse(Question question, String reponse) {
         //Cette fonction retourne -1 si la réponse est fausse, sinon elle retourne le coefficient de la réponse
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
@@ -443,7 +446,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         String nom = getCell(fichier,0,0);
         int score = stringToInt(getCell(fichier,0,1));
         int pointsBonus = stringToInt(getCell(fichier,0,2));
-        int niveau = stringToInt(getCell(fichier,0,3));
+        int niveau = scoreIntoNiveau(score);
         //Création d'un tableau de 5 colonnes (pour l'id et les 4 stats) et d'autant de lignes que de questions
         Question[] listeQuestions = initToutesQuestions(nom);
         // Colonne 0 : id de la question | Colonne 1 : Nombre de fois où elle est tombée | 2 : Nb de fois réussie | 3 : Nb de fois skip | 4 : nbFois Ratée
@@ -500,6 +503,10 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
             }
         }
         println("\nLes questions non affichées n'ont pas encore été rencontrées.");
+    }
+
+    int scoreIntoNiveau(int score){
+        return (score+1)/100 +1;
     }
 
 
