@@ -29,7 +29,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         
         // On affiche un message du type "C'est parti pour le niveau {niveau du joueur}"
         String[] listeNiveaux = new String[]{"Facile", "Moyen", "Difficile", "Très Difficile"};
-        println("C'est parti pour le niveau "+listeNiveaux[joueur.niveau-1]+" !");
+        println("C'est parti pour le niveau "+joueur.niveau+" !");
         delay(1000);
 
         choix = "-1";
