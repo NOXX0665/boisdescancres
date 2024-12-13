@@ -36,17 +36,18 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
         println("\n\n\nVous vous réveillez dans une étrange forêt... LALALA CONTEXTE ICI");
 
-        while (!equals(choix, "3")) { //Si le choix=3, cela veut dire que le joueur veut sauvegarder et quitter.
+        while (!equals(choix, "4")) { //Si le choix=3, cela veut dire que le joueur veut sauvegarder et quitter.
             //Menu du jeu :
             println("\n\nQue voulez-vous faire ?");
             println("1. Continuer votre chemin");
             println("2. Regarder vos statistiques");
-            println("3. Sauvegarder et quitter");
-            choix = demanderValeur(new String[]{"1","2","3"});
+            println("3. Réviser");
+            println("4. Sauvegarder et quitter");
+            choix = demanderValeur(new String[]{"1","2","3","4"});
 
             if (equals(choix, "1")) {
                 //Choix d'une question parmis toutes les questions dans le fichier ../ressources/questions.csv
-                Question question = questionAleatoire(questionsAdaptees(joueur)); //à améliorer
+                Question question = questionAleatoire(questionsAdaptees(joueur));
 
                 //On pose la question
                 poserQuestion(question);
@@ -61,7 +62,21 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
                 
             } else if (equals(choix, "2")) {
                 menuStats(joueur);
+            } else if (equals(choix, "3")) {
+                if(arrayEquals(questionRevisions(joueur), aucunId())){
+                    println("Impossible de réviser : vous connaissez déjà tout !");
+                }
+                else{
+                Question question = questionAleatoire(questionRevisions(joueur));
+                poserQuestion(question);
+                boolean reponseValide = false;
+                while (!reponseValide) {
+                    reponseValide = demanderReponse(question);
+                }
+                joueur.niveau = scoreIntoNiveau(joueur.score);
+                }
             }
+
 
             
         }
@@ -312,6 +327,11 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         // return new int[]{2,3,4};
     }
 
+    int[] aucunId(){
+        return new int[rowCount(loadCSV(CHEMIN_QUESTIONS))-1];
+        
+    }
+
     int[] tableauPoids() {
         //Utilise les stats du joueur pour retourner un tableau de poids pour chaque question
         //A faire
@@ -335,7 +355,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
         int[] result = new int[rowCount(fichier)-1];
         for(int i = 1 ; i < length(result); i++){
-            if(stringToInt(getCell(fichier,i,2)) > (stringToInt(getCell(fichier,i,3)) + stringToInt(getCell(fichier,i,4)))){
+            if(joueur.listeQuestions[i].nbReussie < (joueur.listeQuestions[i].nbRatee + joueur.listeQuestions[i].nbSkip)){
                 result[i] = i;
             }
         }
@@ -607,5 +627,20 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
             chaine = chaine + tab[i] + " ";
         }
         return chaine;
+    }
+
+    boolean arrayEquals(int[] tab1, int[] tab2){
+        boolean result = true;
+        if(length(tab1) !=length(tab1)){
+            result = false;
+        }
+        else{
+            for(int i = 0; i < length(tab1); i++){
+                if(tab1[i] != tab2[i]){
+                    result = false;
+                }
+            }
+        }
+        return result;
     }
 }
