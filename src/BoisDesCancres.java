@@ -305,7 +305,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         while(!valide){
             idQuestion = (int)(random()*rowCount(loadCSV(CHEMIN_QUESTIONS))+1);
             while(idQuestion != id_pool[i] && i < length(id_pool)-1){
-                i++;
+                i++; //On vérifie si l'id de la question qu'on vient de tirer est dans la liste des id "id_pool"
             }
             if(idQuestion==id_pool[i]){
                 valide = true;
@@ -314,9 +314,10 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         }
         return joueur.listeQuestions[idQuestion];
     }
+
     int[] tousLesId(){
-        int[] result = new int[rowCount(loadCSV(CHEMIN_QUESTIONS))];
-        for(int i = 0 ; i < length(result); i++){
+        int[] result = new int[rowCount(loadCSV(CHEMIN_QUESTIONS))-1];
+        for(int i = 1 ; i < length(result); i++){
             result[i] = i;
         }
         return result;
@@ -536,5 +537,11 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         return chaine;
     }
 
-
+    String toString(int[] tab) {
+        String chaine = "";
+        for (int i=0; i<length(tab); i++) {
+            chaine = chaine + tab[i] + " ";
+        }
+        return chaine;
+    }
 }
