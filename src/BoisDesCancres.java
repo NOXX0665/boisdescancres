@@ -82,7 +82,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         println("Quelle sauvegarde voulez-vous charger ?");
         afficherListeSave();
         print("> ");
-        String choixSave = toLowerCase(demanderValeur(getAllFilesFromDirectory(CHEMIN_SAUVEGARDES)));
+        String choixSave = toLowerCase(demanderValeur(listeSave()));
         joueur=chargerJoueur(choixSave+".csv");
     }
 
@@ -369,14 +369,28 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
     void afficherListeSave() {
         //Doit afficher tout le contenu du dossier de sauvegarde
+        String[] listeSave = listeSave();
+        for(int i = 0 ; i < length(listeSave) ; i++){
+            println(listeSave[i]);
+        }
+
+        // String[] tabFichiers = getAllFilesFromDirectory(CHEMIN_SAUVEGARDES);
+        // if (length(tabFichiers)==0) {
+        //     println("Aucune sauvegarde trouvée. Veuillez commencer une nouvelle partie.");
+        // }
+        // for (int i=0; i<length(tabFichiers); i++) {
+        //     CSVFile fichier = loadCSV(CHEMIN_SAUVEGARDES+"/"+tabFichiers[i]);
+        //     println(getCell(fichier,0,0));
+        // }
+    }
+
+    String[] listeSave(){
         String[] tabFichiers = getAllFilesFromDirectory(CHEMIN_SAUVEGARDES);
-        if (length(tabFichiers)==0) {
-            println("Aucune sauvegarde trouvée. Veuillez commencer une nouvelle partie.");
+        String[] listeSave = new String[length(tabFichiers)];
+        for(int i = 0; i<length(listeSave);i++){
+            listeSave[i] = getCell(loadCSV(CHEMIN_SAUVEGARDES+"/"+tabFichiers[i]),0,0);
         }
-        for (int i=0; i<length(tabFichiers); i++) {
-            CSVFile fichier = loadCSV(CHEMIN_SAUVEGARDES+"/"+tabFichiers[i]);
-            println(getCell(fichier,0,0));
-        }
+        return listeSave;
     }
 
     Joueur creerJoueur() {
