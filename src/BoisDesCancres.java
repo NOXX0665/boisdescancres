@@ -46,7 +46,7 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
 
             if (equals(choix, "1")) {
                 //Choix d'une question parmis toutes les questions dans le fichier ../ressources/questions.csv
-                Question question = questionAleatoire(tousLesId()); //à améliorer
+                Question question = questionAleatoire(questionsAdaptees(joueur)); //à améliorer
 
                 //On pose la question
                 poserQuestion(question);
@@ -96,7 +96,6 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         println("Que souhaitez-vous faire ?");
         println("1. Voir des statistique plus précises sur les questions");
         println("2. Revenir au jeu");
-        print("> ");
         String choix = demanderValeur(new String[]{"1","2"});
         if (equals(choix, "1")) {
             afficherStatAvancee();
@@ -316,6 +315,18 @@ class BoisDesCancres extends Program { //NE PAS OUBLIER DE CHANGER LE NOM DE LA 
         //Utilise les stats du joueur pour retourner un tableau de poids pour chaque question
         //A faire
         return new int[1];
+    }
+
+
+    int[] questionsAdaptees(Joueur joueur){
+        CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
+        int[] result = new int[rowCount(fichier)-1];
+        for(int i = 1 ; i < length(result); i++){
+            if((stringToInt(getCell(fichier,i,1)) < joueur.niveau+2) && (stringToInt(getCell(fichier,i,1)) > joueur.niveau-2)){
+                result[i] = i;
+            }
+        }
+        return result;
     }
 
     
