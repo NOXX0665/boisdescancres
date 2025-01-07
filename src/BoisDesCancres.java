@@ -21,7 +21,7 @@ class BoisDesCancres extends Program {
         if (choix.equals("3")) {
             System.exit(0);
         } else if (choix.equals("2")) {
-            menuChargerSave(joueur);
+            joueur = menuChargerSave(joueur);
         } else if (choix.equals("1")) {
             joueur=creerJoueur();
         }
@@ -88,13 +88,16 @@ class BoisDesCancres extends Program {
     ////////////////////////////////////////////
 
 
-    void menuChargerSave(Joueur joueur) {
+    Joueur menuChargerSave(Joueur joueur) {
+        // Cette fonction demande quelle sauvegarde charger et charge le joueur correspondant.
+        // Elle retourne le joueur avec les questions chargées.
         clearScreen();
         println("Quelle sauvegarde voulez-vous charger ?");
         afficherListeSave();
         print("> ");
         String choixSave = toLowerCase(demanderValeur(listeSave()));
         joueur=chargerJoueur(choixSave+".csv");
+        return joueur;
     }
 
     void menuStats(Joueur joueur) {
@@ -117,8 +120,6 @@ class BoisDesCancres extends Program {
 
     boolean poserQuestion(Question question, Joueur joueur) {
         //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
-        print("Question n°"+question.id+": ");
-        println(question.question+"\n\n");
 
         if (joueur.pointsBonus>0) {
             println("Il vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.\n");
@@ -197,6 +198,7 @@ class BoisDesCancres extends Program {
         int nbQuestions = rowCount(fichier);
         Question[] questions = new Question[nbQuestions-1];
 
+
         for (int i=1; i<nbQuestions; i++) {
             questions[i-1] = creerQuestion(i, nomJoueur);
         }
@@ -228,7 +230,9 @@ class BoisDesCancres extends Program {
             nbRatee = stringToInt(getCell(fichierJoueur, id, 4));
         }
 
-        return newQuestion(id, difficulte, question, reponses, indice, nbRencontree, nbReussie, nbSkip, nbRatee);
+        Question q = newQuestion(id, difficulte, question, reponses, indice, nbRencontree, nbReussie, nbSkip, nbRatee);
+
+        return q;
     }
 
     Question newQuestion(int id, int difficulte, String question, String[][] reponses, String indice, int nbRencontree, int nbReussie, int nbSkip, int nbRatee) {
@@ -310,6 +314,7 @@ class BoisDesCancres extends Program {
             }
             i = 0;
         }
+        print(joueur.listeQuestions);
         return joueur.listeQuestions[idQuestion];
     }
 
@@ -477,7 +482,10 @@ class BoisDesCancres extends Program {
         //Création d'un tableau de 5 colonnes (pour l'id et les 4 stats) et d'autant de lignes que de questions
         Question[] listeQuestions = initToutesQuestions(nom);
         // Colonne 0 : id de la question | Colonne 1 : Nombre de fois où elle est tombée | 2 : Nb de fois réussie | 3 : Nb de fois skip | 4 : nbFois Ratée
-        return newJoueur(nom,score, niveau, pointsBonus,listeQuestions);
+
+        Joueur joueur = newJoueur(nom, score, niveau, pointsBonus, listeQuestions);
+
+        return joueur;
     }
 
 
