@@ -4,8 +4,7 @@ import extensions.CSVFile;
 class BoisDesCancres extends Program {
     final String CHEMIN_QUESTIONS = "ressources/questions.csv";
     final String CHEMIN_SAUVEGARDES = "ressources/sauvegardes/";
-    final double SEUIL_BONUS_TEMPS=3000.0; // Le seuil pour gagner un point bonus quand on répond à une question
-    final int NB_POINTS_RAPIDE = 5; //Le nombre de points bonus que le joueur gagne quand il répond assez vite (voir SEUIL_BONUS_TEMPS)
+    final int POINTS = 10; //Le nombre de points (avant calcul avec coefficients) que le joueur gagne. Baisser pour rendre la question plus compliqué
 
     void algorithm() {
         Joueur joueur = new Joueur();
@@ -85,9 +84,9 @@ class BoisDesCancres extends Program {
     }
 
 
-    ////////////////////////////////////////////
+    /////////////////////////////////////////////
     // Fonctions pour les menus et l'interface //
-    ////////////////////////////////////////////
+    /////////////////////////////////////////////
 
 
     Joueur menuChargerSave(Joueur joueur) {
@@ -139,18 +138,18 @@ class BoisDesCancres extends Program {
         double tempsFin=getTime();
         double temps=tempsFin-tempsDebut;
         question.nbRencontree++;
-        if (!(coeffReponse(question, reponse)==-1)) { //Si c'est une bonne réponse
+
+        double coefficient = coeffReponse(question, reponse);
+        int points = calculerPoints(question.difficulte, joueur.niveau, temps, coefficient);
+        
+
+        if (coeffReponse(question, reponse)!=-1) { //Si c'est une bonne réponse
             clearScreen();
             println("VOICI LE TEMPS FINAL : "+temps);
             println("Bonne réponse !");
             ajouterPointsBonus(question, joueur);
 
-            if (temps<SEUIL_BONUS_TEMPS) {
-                println("Vous avez répondu en moins de "+(int) SEUIL_BONUS_TEMPS/1000+" secondes !\nVous avez donc gagné "+NB_POINTS_RAPIDE+" points !");
-                joueur.score+=NB_POINTS_RAPIDE;
-            } else {
-                joueur.score++;
-            }
+            joueur.score+=points;
 
             question.nbReussie++;
             return true;
@@ -177,7 +176,7 @@ class BoisDesCancres extends Program {
         } else { //Si ce n'est pas la bonne réponse
             println("Mauvaise réponse...");
             println("La bonne réponse était : "+question.reponses[0][0]);
-            joueur.score--;
+            joueur.score+=points;
             question.nbRatee++;
             return true;
         }
@@ -327,9 +326,9 @@ class BoisDesCancres extends Program {
             if(idQuestion==id_pool[i]){
                 valide = true;
             }
+            print(idQuestion);
             i = 0;
         }
-        print(joueur.listeQuestions);
         return joueur.listeQuestions[idQuestion];
     }
 
@@ -392,6 +391,13 @@ class BoisDesCancres extends Program {
             }
         }
         return coeff;
+    }
+
+    void testCoeffReponse(){
+        Question ques = creerQuestion(20,"nouveau");
+        assertEquals(coeffReponse(ques,"good afternoon"),1.0);
+        assertEquals(coeffReponse(ques,"hello"),0.5);
+        assertEquals(coeffReponse(ques,"cat"),-1.0);
     }
 
     String toString(String[][] tab) {
@@ -461,7 +467,6 @@ class BoisDesCancres extends Program {
 
         boolean valide = false;
         String niveauString = "";
-        int score = 0;
 
         clearScreen();
         println("Bienvenue, "+nom+", quel niveau pensez-vous avoir en Anglais ?\n1. Mauvais\n2. Moyen\n3. Bon\n4. Très bon");
@@ -470,6 +475,7 @@ class BoisDesCancres extends Program {
             valide = true;
         }
         int niveau = stringToInt(niveauString);
+        int score = niveau*100;
 
         //Il faudrait se mettre d'accord sur combien de points il faut pour chaque niveau
         //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
@@ -532,6 +538,7 @@ class BoisDesCancres extends Program {
     //id,nbRencontree,nbReussie,nbSkip,nbRatee
 
     void afficherStatistiques(Joueur joueur){
+        // Cette fonction affiche les statistiques du joueur
         println("Vos statistiques :");
         println("Votre pseudo : " + joueur.nom);
         println("Votre score : " + joueur.score);
@@ -557,6 +564,51 @@ class BoisDesCancres extends Program {
 
     int scoreIntoNiveau(int score){
         return (score+1)/100 +1;
+    }
+
+    /////////////////////////
+    // Fonctions de calcul //
+    /////////////////////////
+
+
+    int calculerPoints(int niveauQuestion, int niveauJoueur, double temps, double coefficient){
+        int points = POINTS;
+        int differenceNiveau = niveauQuestion-niveauJoueur;
+        //utilisation du coefficient de la réponse (1 si elle est bonne, 0.5 si elle est moins bien, -1 si elle est fausse)
+        points = (int)(points*coefficient);
+        if(points > 0){
+            //calcul des points en cas de réussite
+            if (differenceNiveau == 1){
+                points = (int)(points *1.5);
+            }
+            else if(differenceNiveau == 2){
+                points = (int)(points*2);
+            }
+            else if(differenceNiveau == -1){
+                points = (int)(points*0.5);
+            }
+            else if(differenceNiveau == -2){
+                points = (int)(points*0.25);
+            }
+            //multiplicateur de temps : Si on mets moins de 10 secondes, on gagne un multiplicateur de points qui équivaut à +1% par seconde restantes (exemple : on répond bien en 1 seconde, on a un bonus de +9%)
+            if(temps <10000){
+                points =(int)(points * (1.1 - (temps/10000)));
+
+            }
+        }
+        else{
+            if (differenceNiveau == 1){
+                points = (int)(points *0.25);
+            }
+            else if(differenceNiveau == 2){
+                points = (int)(points*0.125);
+            }
+            else if(differenceNiveau == -1){
+                points = (int)(points*0.75);
+            }
+        }
+        print("Points gagnés : " + points);
+        return points;
     }
 
 
