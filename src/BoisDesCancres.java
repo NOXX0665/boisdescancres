@@ -4,6 +4,8 @@ import extensions.CSVFile;
 class BoisDesCancres extends Program {
     final String CHEMIN_QUESTIONS = "ressources/questions.csv";
     final String CHEMIN_SAUVEGARDES = "ressources/sauvegardes/";
+    final double SEUIL_BONUS_TEMPS=3000.0; // Le seuil pour gagner un point bonus quand on répond à une question
+    final int NB_POINTS_RAPIDE = 5; //Le nombre de points bonus que le joueur gagne quand il répond assez vite (voir SEUIL_BONUS_TEMPS)
 
     void algorithm() {
         Joueur joueur = new Joueur();
@@ -120,6 +122,7 @@ class BoisDesCancres extends Program {
 
     boolean poserQuestion(Question question, Joueur joueur) {
         //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
+        println(question.question);
 
         if (joueur.pointsBonus>0) {
             println("Il vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.\n");
@@ -131,13 +134,24 @@ class BoisDesCancres extends Program {
     boolean demanderReponse(Question question, Joueur joueur) {
         //Demande une réponse au joueur, vérifie si elle est valide et retourne vrai si la réponse est valide (soit bonne réponse, soit passer, soit indice), faux sinon.
         print("Votre réponse > ");
+        double tempsDebut=getTime();
         String reponse = readString(); //On ne peut pas utiliser demanderValeur()
+        double tempsFin=getTime();
+        double temps=tempsFin-tempsDebut;
         question.nbRencontree++;
         if (!(coeffReponse(question, reponse)==-1)) { //Si c'est une bonne réponse
             clearScreen();
+            println("VOICI LE TEMPS FINAL : "+temps);
             println("Bonne réponse !");
             ajouterPointsBonus(question, joueur);
-            joueur.score++;
+
+            if (temps<SEUIL_BONUS_TEMPS) {
+                println("Vous avez répondu en moins de "+(int) SEUIL_BONUS_TEMPS/1000+" secondes !\nVous avez donc gagné "+NB_POINTS_RAPIDE+" points !");
+                joueur.score+=NB_POINTS_RAPIDE;
+            } else {
+                joueur.score++;
+            }
+
             question.nbReussie++;
             return true;
         } else if (equals(reponse, "passer")) { //Si le joueur veut passer la question
@@ -222,6 +236,7 @@ class BoisDesCancres extends Program {
         int nbRatee = 0;
 
         //Recupérer les stats de la question
+        nomJoueur=toLowerCase(nomJoueur);
         if (!equals(nomJoueur, "nouveau")) {
             CSVFile fichierJoueur = loadCSV(CHEMIN_SAUVEGARDES+"/"+nomJoueur+".csv");
             nbRencontree = stringToInt(getCell(fichierJoueur, id, 1));
@@ -481,7 +496,7 @@ class BoisDesCancres extends Program {
         int niveau = scoreIntoNiveau(score);
         //Création d'un tableau de 5 colonnes (pour l'id et les 4 stats) et d'autant de lignes que de questions
         Question[] listeQuestions = initToutesQuestions(nom);
-        // Colonne 0 : id de la question | Colonne 1 : Nombre de fois où elle est tombée | 2 : Nb de fois réussie | 3 : Nb de fois skip | 4 : nbFois Ratée
+        // Colonnes : 0 : id de la question | 1 : Nombre de fois où elle est tombée | 2 : Nb de fois réussie | 3 : Nb de fois skip | 4 : nbFois Ratée
 
         Joueur joueur = newJoueur(nom, score, niveau, pointsBonus, listeQuestions);
 
