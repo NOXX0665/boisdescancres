@@ -141,41 +141,56 @@ class BoisDesCancres extends Program {
 
         double coefficient = coeffReponse(question, reponse);
         int points = calculerPoints(question.difficulte, joueur.niveau, temps, coefficient);
+        String[] couleurs = ANSI_COLORS;
+        //"black", "red", "green", "yellow", "blue", "purple", "cyan", "white"
+        //   0,      1,      2,        3,       4,       5,       6,      7
         
 
         if (coeffReponse(question, reponse)!=-1) { //Si c'est une bonne réponse
             clearScreen();
+            text("green"); // On passe le texte en vert
             println("VOICI LE TEMPS FINAL : "+temps);
-            println("Bonne réponse !");
+            println("Bonne réponse !\n\nVous avez gagné "+points+" points.");
+            text(couleurs[7]); // On repasse le texte en blanc
             ajouterPointsBonus(question, joueur);
 
             joueur.score+=points;
 
             question.nbReussie++;
             return true;
+
         } else if (equals(reponse, "passer")) { //Si le joueur veut passer la question
             if (joueur.pointsBonus>0) {
+                
                 println("Vous avez passé la question.");
                 question.nbSkip++;
                 joueur.pointsBonus--;
                 return true;
+
             } else {
                 println("Vous n'avez pas assez de points bonus pour passer la question.");
                 return false;
             }
+
         } else if (equals(reponse, "indice")) { //Si le joueur veut un indice
             if (joueur.pointsBonus>0) {
                 println("Indice : "+question.indice);
                 //Pas besoin d'incrémenter le compteur d'indices dans les stats car on peut le calculer avec les autres stats
                 joueur.pointsBonus--;
                 return false;
+
             } else {
                 println("Vous n'avez pas assez de points bonus pour demander un indice.");
                 return false;
+
             }
+
         } else { //Si ce n'est pas la bonne réponse
+            clearScreen();
+            text("red"); // On passe le texte en rouge
             println("Mauvaise réponse...");
             println("La bonne réponse était : "+question.reponses[0][0]);
+            text(couleurs[7]); // On repasse le texte en blanc
             joueur.score+=points;
             question.nbRatee++;
             return true;
