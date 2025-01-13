@@ -70,9 +70,13 @@ class BoisDesCancres extends Program {
                 menuStats(joueur);
             } else if (equals(choix, "3")) {
                 if(arrayEquals(questionRevisions(joueur), aucunId())){
+                    clearScreen();
+                    text("red");
                     println("Impossible de réviser : vous connaissez déjà tout !");
+                    text("white");
                 }
                 else{
+                    clearScreen();
                     Question question = questionAleatoire(questionRevisions(joueur), joueur);
                     poserQuestion(question, joueur);
                     boolean reponseValide = false;
@@ -85,8 +89,11 @@ class BoisDesCancres extends Program {
         }
 
         //Sauvegarde et quitter
-        println("Sauvegarde en cours...");
+        text("yellow");
+        println("Sauvegarde en cours...\nNe fermez pas le jeu !");
         saveJoueur(joueur, joueur.nom+".csv");
+        clearScreen();
+        text("green");
         println("Partie sauvegardée. Au revoir !");
     }
 
@@ -119,6 +126,7 @@ class BoisDesCancres extends Program {
         println("1. Voir des statistique plus précises sur les questions");
         println("2. Revenir au jeu");
         String choix = demanderValeur(new String[]{"1","2"});
+        clearScreen();
         if (equals(choix, "1")) {
             afficherStatAvancee(joueur);
             println("\nAppuyez sur Entrée pour revenir au jeu.");
@@ -127,11 +135,14 @@ class BoisDesCancres extends Program {
     }
 
     boolean poserQuestion(Question question, Joueur joueur) {
-        //Pose une question au joueur et retourne vrai si la réponse est bonne, faux sinon
+        //Pose une question au joueur en vérifiant s'il a assez de points bonus pour passer
+        
+        text("green");
         println(question.question);
+        text("white");
 
         if (joueur.pointsBonus>0) {
-            println("Il vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.\n");
+            println("\nIl vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.\n");
         }
 
         return true;
@@ -148,17 +159,14 @@ class BoisDesCancres extends Program {
 
         double coefficient = coeffReponse(question, reponse);
         int points = calculerPoints(question.difficulte, joueur.niveau, temps, coefficient);
-        String[] couleurs = ANSI_COLORS;
-        //"black", "red", "green", "yellow", "blue", "purple", "cyan", "white"
-        //   0,      1,      2,        3,       4,       5,       6,      7
         
 
         if (coeffReponse(question, reponse)!=-1) { //Si c'est une bonne réponse
             clearScreen();
             text("green"); // On passe le texte en vert
-            println("VOICI LE TEMPS FINAL : "+temps);
             println("Bonne réponse !\n\nVous avez gagné "+points+" points.");
-            text(couleurs[7]); // On repasse le texte en blanc
+            text("white"); // On repasse le texte en blanc
+            // println("\nVous avez répondu en "+temps/1000+" secondes.");
             ajouterPointsBonus(question, joueur);
 
             joueur.score+=points;
@@ -197,7 +205,8 @@ class BoisDesCancres extends Program {
             text("red"); // On passe le texte en rouge
             println("Mauvaise réponse...");
             println("La bonne réponse était : "+question.reponses[0][0]);
-            text(couleurs[7]); // On repasse le texte en blanc
+            println("\nVous avez perdu "+abs(points)+" points :(");
+            text("white"); // On repasse le texte en blanc
             joueur.score+=points;
             question.nbRatee++;
             return true;
@@ -580,7 +589,7 @@ class BoisDesCancres extends Program {
                 println("   Nombre de fois ratée : " + questions[i].nbRatee);
             }
         }
-        println("\nLes questions non affichées n'ont pas encore été rencontrées.");
+        println("\nCes statistiques sont celles des questions que vous avez rencontrées au moins une fois.\nSi vous n'avez pas encore rencontré une question, elle n'aparaîtra pas dans ces statistiques.");
     }
 
     int scoreIntoNiveau(int score){
@@ -628,7 +637,7 @@ class BoisDesCancres extends Program {
                 points = (int)(points*0.75);
             }
         }
-        print("Points gagnés : " + points);
+        // print("Points gagnés : " + points);
         return points;
     }
 
