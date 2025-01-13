@@ -6,7 +6,7 @@ class BoisDesCancres extends Program {
     final String CHEMIN_SAUVEGARDES = "ressources/sauvegardes/";
     final int POINTS = 10; //Le nombre de points (avant calcul avec coefficients) que le joueur gagne. Baisser pour rendre la question plus compliqué
 
-    void algorithm() {
+    void _algorithm() {
         Joueur joueur = new Joueur();
 
         //Menu d'accueil
@@ -406,12 +406,8 @@ class BoisDesCancres extends Program {
         return result;
     }
 
-    
-
-    
-
     double coeffReponse(Question question, String reponse) {
-        //Cette fonction retourne -1 si la réponse est fausse, sinon elle retourne le coefficient de la réponse
+        //Cette fonction retourne -1 si la réponse n'est pas dans la liste des réponses des questions, sinon elle retourne le coefficient de la réponse
         CSVFile fichier = loadCSV(CHEMIN_QUESTIONS);
         double coeff = -1;
         String[][] reponses = question.reponses;
@@ -540,11 +536,6 @@ class BoisDesCancres extends Program {
     }
 
 
-    int scoreToNiveau(int score) {
-        //Retourne le niveau correspondant à un nombre de points
-        //à remplir
-        return 1;
-    }
 
     void saveJoueur(Joueur joueur, String nomFichier) {
         String[][] saveString = new String[length(joueur.listeQuestions)+1][5];
@@ -594,6 +585,11 @@ class BoisDesCancres extends Program {
 
     int scoreIntoNiveau(int score){
         return (score+1)/100 +1;
+    }
+
+    void testScoreIntoNiveau() {
+        println("Il faudrait faire un test pour cette fonction on sait jamais");
+        println("Mais j'ai pas trop compris pourquoi on ajoute 1 aux points avant de diviser par 100 et aussi après avoir divisé par 100");
     }
 
     /////////////////////////
@@ -671,6 +667,8 @@ class BoisDesCancres extends Program {
 
     int demanderValeur(int[] valeursPossibles) {
         //Demande une valeur à l'utilisateur et vérifie si elle est dans le tableau de valeurs possibles
+        //On ne peux pas faire de tests sur cette fonction car elle demande une valeur à l'utilisateur
+
         boolean valide = false;
         String valeur = "";
         while (!valide) {
@@ -688,6 +686,8 @@ class BoisDesCancres extends Program {
 
     String demanderValeur(String[] valeursPossibles) {
         //Demande une valeur à l'utilisateur et vérifie si elle est dans le tableau de valeurs possibles
+        //On ne peux pas faire de tests sur cette fonction car elle demande une valeur à l'utilisateur
+
         String valeur = "";
         boolean valide = false;
         while (!valide) {
@@ -712,13 +712,6 @@ class BoisDesCancres extends Program {
         }
     }
 
-    String toString(Question[] tab) {
-        String chaine = "";
-        for (int i=0; i<length(tab); i++) {
-            chaine = chaine + tab[i] + "\n";
-        }
-        return chaine;
-    }
 
     String toString(int[] tab) {
         String chaine = "";
@@ -728,9 +721,15 @@ class BoisDesCancres extends Program {
         return chaine;
     }
 
+    void testToString() {
+        assertEquals("1 2 3 ", toString(new int[]{1,2,3}));
+        assertEquals("781 0 1 ", toString(new int[]{781,0,1}));
+        assertEquals("-34 0 1 ", toString(new int[]{-34,0,1}));
+    }
+
     boolean arrayEquals(int[] tab1, int[] tab2){
         boolean result = true;
-        if(length(tab1) !=length(tab1)){
+        if(length(tab1) !=length(tab2)){
             result = false;
         }
         else{
@@ -741,5 +740,13 @@ class BoisDesCancres extends Program {
             }
         }
         return result;
+    }
+
+    void testArrayEquals() {
+        assertTrue(arrayEquals(new int[]{1,2,3}, new int[]{1,2,3}));
+        assertFalse(arrayEquals(new int[]{1,2,3}, new int[]{1,2,4}));
+        assertFalse(arrayEquals(new int[]{1,2,3}, new int[]{1,2,3,4}));
+        assertTrue(arrayEquals(new int[]{}, new int[]{}));
+        assertFalse(arrayEquals(new int[]{1}, new int[]{}));
     }
 }
