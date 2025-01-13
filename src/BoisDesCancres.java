@@ -11,7 +11,10 @@ class BoisDesCancres extends Program {
 
         //Menu d'accueil
         //On demande au joueur s'il veut commencer une nouvelle partie ou charger une sauvegarde
+        clearScreen();
+        text("green");
         afficherImage("ressources/ascii_art/logo.txt");
+        text("white");
 
         println("Bienvenue dans le Bois Des Cancres !");
         println("1. Nouvelle partie");
@@ -24,6 +27,7 @@ class BoisDesCancres extends Program {
         } else if (choix.equals("2")) {
             joueur = menuChargerSave(joueur);
         } else if (choix.equals("1")) {
+            clearScreen();
             joueur=creerJoueur();
         }
         
@@ -33,7 +37,9 @@ class BoisDesCancres extends Program {
         choix = "-1";
 
         clearScreen();
+        text("green");
         println("Vous vous réveillez dans une étrange forêt... Vous voyez des cancres partout autour de vous !\nOn dirait que vous devez répondre à leurs questions pour vous échapper de ce lieu maudit.");
+        text("white");
 
         while (!equals(choix, "4")) { //Si le choix=3, cela veut dire que le joueur veut sauvegarder et quitter.
             //Menu du jeu :
@@ -45,6 +51,7 @@ class BoisDesCancres extends Program {
             choix = demanderValeur(new String[]{"1","2","3","4"});
 
             if (equals(choix, "1")) {
+                clearScreen();
                 //Choix d'une question parmis toutes les questions dans le fichier ../ressources/questions.csv
                 Question question = questionAleatoire(questionsAdaptees(joueur), joueur);
 
@@ -341,7 +348,6 @@ class BoisDesCancres extends Program {
             if(idQuestion==id_pool[i]){
                 valide = true;
             }
-            print(idQuestion);
             i = 0;
         }
         return joueur.listeQuestions[idQuestion];
@@ -691,7 +697,6 @@ class BoisDesCancres extends Program {
     void afficherImage(String chemin){
         //Affiche une image en ASCII art et supprime le contenu de la console.
         //Le chemin doit pointer vers un fichier texte contenant l'image en ASCII art.
-        clearScreen();
         File fichier = new File(chemin);
         while (ready(fichier)){
             println(fichier.readLine());
