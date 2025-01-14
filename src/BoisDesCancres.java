@@ -6,7 +6,7 @@ class BoisDesCancres extends Program {
     final String CHEMIN_SAUVEGARDES = "ressources/sauvegardes/";
     final int POINTS = 10; //Le nombre de points (avant calcul avec coefficients) que le joueur gagne. Baisser pour rendre la question plus compliqué
 
-    void _algorithm() {
+    void algorithm() {
         Joueur joueur = new Joueur();
 
         //Menu d'accueil
@@ -201,7 +201,7 @@ class BoisDesCancres extends Program {
             }
 
         } else { //Si ce n'est pas la bonne réponse
-            clearScreen();
+            //clearScreen(); //waypoint
             text("red"); // On passe le texte en rouge
             println("Mauvaise réponse...");
             println("La bonne réponse était : "+question.reponses[0][0]);
@@ -600,37 +600,46 @@ class BoisDesCancres extends Program {
     int calculerPoints(int niveauQuestion, int niveauJoueur, double temps, double coefficient){
         int points = POINTS;
         int differenceNiveau = niveauQuestion-niveauJoueur;
+        println("difference : " + differenceNiveau);
         //utilisation du coefficient de la réponse (1 si elle est bonne, 0.5 si elle est moins bien, -1 si elle est fausse)
         points = (int)(points*coefficient);
+        print("Nombre de points après passage du coefficient : " + points);
         if(points > 0){
             //calcul des points en cas de réussite
             if (differenceNiveau == 1){
                 points = (int)(points *1.5);
+                println("La question est 1 niveau plus haut donc on fait x1.5");
             }
             else if(differenceNiveau == 2){
                 points = (int)(points*2);
+                println("La question est 2 niveau plus haut donc on fait x2");
             }
             else if(differenceNiveau == -1){
                 points = (int)(points*0.5);
+                println("La question est 1 niveau plus bas donc on fait x0.5");
             }
             else if(differenceNiveau == -2){
                 points = (int)(points*0.25);
+                println("La question est 2 niveau plus bas donc on fait x0.25");
             }
             //multiplicateur de temps : Si on mets moins de 10 secondes, on gagne un multiplicateur de points qui équivaut à +1% par seconde restantes (exemple : on répond bien en 1 seconde, on a un bonus de +9%)
             if(temps <10000){
                 points =(int)(points * (1.1 - (temps/10000)));
-
+                println("Tu as pris " + temps/1000 + " secondes donc on fait x" + (1.1 - (temps/10000)));
             }
         }
         else{
             if (differenceNiveau == 1){
                 points = (int)(points *0.25);
+                println("La question est 1 niveau plus haut donc on fait x0.25");
             }
             else if(differenceNiveau == 2){
                 points = (int)(points*0.125);
+                println("La question est 2 niveau plus haut donc on fait x0.125");
             }
             else if(differenceNiveau == -1){
                 points = (int)(points*0.75);
+                println("La question est 1 niveau plus bas donc on fait x0.75");
             }
         }
         // print("Points gagnés : " + points);
