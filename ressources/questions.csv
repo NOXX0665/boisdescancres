@@ -1,39 +1,301 @@
 id,difficulté,question,liste_reponses,indice
-1,1,Ceci est une question test les réponses disponibles sont A B ou C,a;1;b;1;c;1,Les réponses sont A B ou C
+1,-20,Ceci est une question test les réponses disponibles sont A B ou C,a;1;b;1;c;1,Les réponses sont A B ou C
 2,1,Eh toi comment tu dis “bonjour” en anglais steuplé ?,hello;1,Voici un indice
-3,1,Comment dit-on "je" en anglais ?,i;1,Voici un indice
-4,1,Comment dit-on "tu" ou "vous" en anglais ?,you;1,Voici un indice
-5,1,Comment dit-on "il" en anglais ?,he;1,Voici un indice
-6,1,Comment dit-on "elle" en anglais ?,she;1,Voici un indice
-7,1,Comment dit-on "ils" ou "elles" en anglais ?,they;1,Voici un indice
-8,3,Comment dit-on “pêcheur” en anglais ?,fisherman;1;fisher;1;angler;1,Voici un indice
-9,2,Quel est le pluriel de "child" en anglais ?,children;1,Indice : Ce n’est pas "childs".
+3,1,Comment dit-on "je" en anglais ?,i;1,Le mot ne fait qu'une lettre de long
+4,1,Comment dit-on "tu" ou "vous" en anglais ?,you;1,Le mot fait 3 lettres de long
+5,1,Comment dit-on "il" en anglais ?,he;1,Michael Jackson disait "il il" en anglais
+6,1,Comment dit-on "elle" en anglais ?,she;1,Le mot fait 3 lettres de long
+7,1,Comment dit-on "ils" ou "elles" en anglais ?,they;1,C'est le même mot pour les deux
+8,3,Comment dit-on “pêcheur” en anglais ?,fisherman;1;fisher;1;angler;1,Monsieur le poissonieur ;)
+9,2,Quel est le pluriel de "child" en anglais ?,children;1,Ce n'est pas "childs".
 10,2,Comment dit-on "maison" en anglais ?,house;1,Un endroit où tu vis.
 11,2,Quel mot anglais signifie "chien" ?,dog;1,Un fidèle compagnon.
 12,3,Comment traduit-on "ordinateur" en anglais ?,computer;1;pc;1,Un appareil électronique pour travailler.
 13,3,Que signifie "to eat" en français ?,manger;1,Ce que tu fais quand tu as faim.
-14,3,Comment dit-on "courir" en anglais ?,run;1,Ce que tu fais pour te déplacer vite.
+14,3,Comment dit-on "courir" en anglais ?,to run;1,Ce que tu fais pour te déplacer vite.
 15,4,Quel est le passé du verbe "to be" ?,was;1;were;1,Utilisé pour parler du passé.
-16,4,Comment dit-on "je vais à l’école" en anglais ?,i go to school;1,Une phrase complète.
-17,4,Comment dit-on "j’aime lire des livres" en anglais ?,i love reading books;1;i like reading books;1,Le mot reading est dans cette phrase.
+16,4,Comment dit-on "je vais à l'école" en anglais ?,i go to school;1,Il y a le mot "school" dedans.
+17,4,Comment dit-on "j'aime lire des livres" en anglais ?,i love reading books;1;i like reading books;1,Le mot reading est dans cette phrase.
 18,4,Quel mot anglais désigne un oiseau qui vole la nuit et dit "hoot" ?,owl;1,C'est un animal nocturne.
 19,1,Comment dit-on "chat" en anglais ?,cat;1,Le mot commence par c.
-20,1,Quel est l’équivalent anglais de "bonjour" l’après-midi ?,good afternoon;1;hello;0.5,Le mot commence par good
+20,1,Quel est l'équivalent anglais de "bonjour" l'après-midi ?,good afternoon;1;hello;0.5,Le mot commence par good
 21,1,Comment dit-on "merci" en anglais ?,thank you;1;thanks;1,Ça commence par th
 22,2,Quel mot anglais signifie "ami" ?,friend;1;buddy;0.5;pal;1.1,Ça commence par f et finit par nd
 23,2,Comment traduit-on "manger" en anglais ?,eat;1;dine;0.5;consume;0.5,Le mot commence par e
 24,2,Quel mot anglais signifie "rapide" ?,fast;1;quick;1;swift;1.5,Le mot commence par f et finit par st
 25,3,Comment dit-on "grandir" en anglais ?,grow;1;expand;1.5,Le mot commence par gr
-26,3,Que signifie "to play" en français ?,jouer;1;s’amuser;0.5,Le mot commence par p
-27,3,Comment traduit-on "bibliothèque" en anglais ?,library;1;book house;0.5,Ça commence par l et a book dedans
+26,3,Que signifie "to play" en français ?,jouer;1;s'amuser;0.5,Le mot commence par p
+27,3,Comment traduit-on "bibliothèque" en anglais ?,library;1;bookshelf;1;library;1;book house;0.5,Ça commence par l et a book dedans
 28,3,Quel est l'équivalent anglais de "fatigué" ?,tired;1;exhausted;0.5;sleepy;0.5,Le mot commence par t et finit par ed
 29,4,Quel est le pluriel irrégulier de "foot" en anglais ?,feet;1;foots;0.5,Le mot commence par f et contient deux e
-30,4,Comment dit-on "je n’aime pas les légumes" en anglais ?,i don’t like vegetables;1;i dislike vegetables;0.5,La phrase contient vegetables
-31,4,Que signifie "to swim" en français ?,nager;1;se baigner;0.5,C’est ce que tu fais dans une piscine ou dans la mer
+30,4,Comment dit-on "je n'aime pas les légumes" en anglais ?,i don't like vegetables;1;i dislike vegetables;0.5,La phrase contient vegetables
+31,4,Que signifie "to swim" en français ?,nager;1;se baigner;0.5,C'est ce que tu fais dans une piscine ou dans la mer
 32,4,Quel mot anglais désigne une personne qui cuisine pour profession ?,chef;1;cook;0.5,Le mot commence par ch
-33,4,Comment dit-on "il est minuit" en anglais ?,it’s midnight;1;it’s 12 a.m.;0.5,Le mot commence par mid
+33,4,Comment dit-on "il est minuit" en anglais ?,it's midnight;1;it's 12 a.m.;0.5,Le mot commence par mid
 34,4,Quel est le synonyme de "happy" en anglais ?,joyful;1;content;0.5;glad;0.5,Ça commence par j et finit par ful
 35,4,Que signifie "to understand" en français ?,comprendre;1;cerner;0.5,Le mot commence par u et finit par stand
-36,4,Quel est le contraire de "dark" en anglais ?,light;1;bright;0.5,C’est ce que fait le soleil
-37,4,Comment dit-on "Je suis professeur" en anglais ?,i am a teacher;1;i’m a teacher;1,Le mot teacher est dedans
-38,4,Comment dit-on "J’aime la musique" en anglais ?,i love music;1;i like music;0.5,Le mot music est dedans
+36,4,Quel est le contraire de "dark" en anglais ?,light;1;bright;0.5,C'est ce que fait le soleil
+37,4,Comment dit-on "Je suis professeur" en anglais ?,i am a teacher;1;i'm a teacher;1;i am a professor;1;i'm a professor;1,Le mot teacher est dans la phrase
+38,4,Comment dit-on "J'aime la musique" en anglais ?,i love music;1;i like music;0.5,Le mot music est dedans
+39,1,Comment dit-on "eau" en anglais ?,water;1,Le mot commence par w
+40,1,Comment dit-on "pomme" en anglais ?,apple;1,Le mot commence par a et finit par e
+41,2,Quel est le pluriel de "mouse" en anglais ?,mice;1,Ce n'est pas "mouses"
+42,2,Comment dit-on "voiture" en anglais ?,car;1;automobile;0.5,Le mot commence par c
+43,2,Quel mot anglais signifie "soleil" ?,sun;1,Il brille dans le ciel
+44,3,Comment traduit-on "montagne" en anglais ?,mountain;1;hill;0.5,Le mot commence par m
+45,3,Que signifie "to listen" en français ?,écouter;1,Le mot commence par l
+46,3,Comment dit-on "fenêtre" en anglais ?,window;1,Le mot commence par w
+47,3,Quel est le pluriel de "man" en anglais ?,men;1,Ce n'est pas "mans"
+48,4,Quel est le verbe irrégulier pour "aller" en anglais ?,go;1;went;1;gone;0.5,Le verbe commence par g
+49,4,Comment dit-on "Je suis fatigué" en anglais ?,i am tired;1;i'm tired;1,Le mot tired est dedans
+50,4,Comment dit-on "J'ai besoin d'aide" en anglais ?,i need help;1,Le mot help est dedans
+51,4,Quel est le contraire de "hot" en anglais ?,cold;1;cool;0.5,C'est ce que tu ressens en hiver
+52,4,Que signifie "to think" en français ?,penser;1;réfléchir;0.5,Le mot commence par t
+53,4,Comment dit-on "Je veux apprendre l'anglais" en anglais ?,i want to learn english;1,Le mot learn est dedans
+54,4,Quel mot anglais désigne un animal qui vit dans l'eau et a des écailles ?,fish;1,Le mot commence par f
+55,4,Quel est le pluriel de "tooth" en anglais ?,teeth;1,Ce n'est pas "tooths"
+56,4,Comment dit-on "Je voyage souvent" en anglais ?,i often travel;1;i travel often;1,Le mot travel est dedans
+57,4,Quel est le contraire de "big" en anglais ?,small;1;little;1,C'est plus petit
+58,4,Comment traduit-on "orage" en anglais ?,storm;1;thunderstorm;1,Le mot commence par s
+59,4,Que signifie "to build" en français ?,construire;1;bâtir;0.5,Le mot commence par b
+60,4,Comment dit-on "Je me lève tôt" en anglais ?,i wake up early;1;i get up early;1,Le mot early est dedans
+61,1,Comment dit-on "livre" en anglais ?,book;1,Le mot commence par b
+62,1,Comment dit-on "soleil" en anglais ?,sun;1,Il brille dans le ciel
+63,2,Quel mot anglais signifie "table" ?,table;1,Le mot est identique en anglais
+64,2,Comment dit-on "arbre" en anglais ?,tree;1,Le mot commence par t
+65,2,Quel est le pluriel de "person" en anglais ?,people;1,Ce n'est pas "persons"
+66,3,Comment traduit-on "montre" (objet) en anglais ?,watch;1,On la porte au poignet
+67,3,Quel mot anglais signifie "hiver" ?,winter;1,Le mot commence par w
+68,3,Comment dit-on "chaise" en anglais ?,chair;1,Le mot commence par ch
+69,3,Que signifie "to drive" en français ?,conduire;1,On le fait avec une voiture
+70,3,Comment traduit-on "valise" en anglais ?,suitcase;1;luggage;0.5,On l'utilise pour voyager
+71,4,Quel est le contraire de "early" en anglais ?,late;1,Le mot commence par l
+72,4,Comment dit-on "Je n'ai pas faim" en anglais ?,i am not hungry;1;i'm not hungry;1,Le mot hungry est dedans
+73,4,Quel mot anglais désigne un animal qui vit dans la jungle et rugit ?,lion;1;tiger;0.5,Le roi des animaux
+74,4,Quel est le pluriel irrégulier de "woman" en anglais ?,women;1,Ce n'est pas "womans"
+75,4,Comment dit-on "Je suis en retard" en anglais ?,i am late;1;i'm late;1,Le mot late est dedans
+76,4,Que signifie "to improve" en français ?,améliorer;1,Le mot commence par i
+77,4,Comment traduit-on "orageux" en anglais ?,stormy;1,Le mot commence par s
+78,4,Quel est le contraire de "open" en anglais ?,closed;1;shut;1,C'est ce que tu fais avec une porte
+79,4,Comment dit-on "Je veux voyager" en anglais ?,i want to travel;1,Le mot travel est dedans
+80,4,Quel mot anglais désigne un fruit jaune et courbé ?,banana;1,Le mot commence par b
+81,1,Comment dit-on "fromage" en anglais ?,cheese;1,Ça commence par ch et ça fond sur une pizza
+82,1,Comment dit-on "porte" en anglais ?,door;1,Tu l'ouvres pour entrer
+83,1,Comment dit-on "mer" en anglais ?,sea;1,C'est plus petit qu'un océan
+84,2,Comment dit-on "montagne" en anglais ?,mountain;1,Le mot commence par m
+85,2,Quel est le pluriel de "goose" en anglais ?,geese;1,Ce n'est pas "gooses"
+86,2,Comment dit-on "souris" en anglais ?,mouse;1,Ça commence par m et finit par se
+87,3,Comment traduit-on "forêt" en anglais ?,forest;1;woods;0.5,C'est plein d'arbres
+88,3,Quel mot anglais signifie "pluie" ?,rain;1,Ça tombe du ciel
+89,3,Comment dit-on "pain" (aliment) en anglais ?,bread;1,Ça commence par b et finit par d
+90,3,Que signifie "to watch" en français ?,regarder;1;observer;0.5,Tu le fais avec tes yeux
+91,4,Quel est le contraire de "strong" en anglais ?,weak;1,Ce n'est pas fort
+92,4,Comment dit-on "Je dois partir" en anglais ?,i have to leave;1;i must go;0.5,Le mot leave est dedans
+93,4,Quel mot anglais désigne un animal qui aime le miel ?,bear;1,C'est un grand animal poilu
+94,4,Quel est le pluriel de "leaf" en anglais ?,leaves;1,Ce n'est pas "leafs"
+95,4,Comment dit-on "Je suis heureux" en anglais ?,i am happy;1;i'm happy;1,Le mot happy est dedans
+96,4,Que signifie "to forget" en français ?,oublier;1,Ce que tu fais quand tu ne te rappelles plus
+97,4,Comment traduit-on "orage" en anglais ?,storm;1;thunderstorm;1,Ça commence par s
+98,4,Quel est le contraire de "noisy" en anglais ?,quiet;1;silent;0.5,Ce que tu fais dans une bibliothèque
+99,4,Comment dit-on "Je veux dormir" en anglais ?,i want to sleep;1,Le mot sleep est dedans
+100,4,Quel mot anglais désigne un fruit rouge avec des pépins ?,apple;1;cherry;0.5,Le mot commence par a
+101,2,Comment dit-on "ami" en anglais ?,friend;1;buddy;0.5;pal;0.5,Le mot commence par f
+102,2,Quel est le pluriel de "fish" en anglais ?,fish;1;fishes;0.5,C'est le même mot
+103,3,Comment dit-on "camion" en anglais ?,truck;1;lorry;0.5,Le mot commence par t
+104,3,Que signifie "to read" en français ?,lire;1,Ce que tu fais avec un livre
+105,4,Quel est le contraire de "cold" en anglais ?,hot;1;warm;0.5,C'est la température de l'été
+106,4,Comment dit-on "Je vais au travail" en anglais ?,i go to work;1,Le mot work est dedans
+107,4,Quel est le pluriel irrégulier de "mouse" en anglais ?,mice;1,Ce n'est pas "mouses"
+108,4,Comment dit-on "Je prends mon petit-déjeuner" en anglais ?,i have breakfast;1,Le mot breakfast est dedans
+109,4,Que signifie "to climb" en français ?,grimper;1;monter;0.5,Ce que tu fais sur une montagne
+110,4,Quel est le contraire de "happy" en anglais ?,sad;1,Un mot court qui exprime la tristesse
+111,1,Comment dit-on "eau" en anglais ?,water;1,C'est ce que tu bois tous les jours
+112,1,Comment dit-on "pomme" en anglais ?,apple;1,C'est un fruit qui commence par a
+113,1,Comment dit-on "chaud" en anglais ?,hot;1,C'est le contraire de froid
+114,1,Comment dit-on "froid" en anglais ?,cold;1,C'est le contraire de chaud
+115,1,Comment dit-on "nuit" en anglais ?,night;1,C'est quand il fait noir dehors
+116,2,Comment dit-on "fenêtre" en anglais ?,window;1,Tu l'ouvres pour aérer une pièce
+117,2,Quel est le pluriel de "man" en anglais ?,men;1,Ce n'est pas "mans"
+118,2,Comment dit-on "neige" en anglais ?,snow;1,C'est blanc et ça tombe en hiver
+119,2,Quel mot anglais signifie "vélo" ?,bike;1;bicycle;1,C'est un moyen de transport à deux roues
+120,2,Comment traduit-on "chatte" (animal) en anglais ?,cat;1;female cat;0.5,C'est un petit félin
+121,3,Comment dit-on "jardin" en anglais ?,garden;1;yard;0.5,Un endroit avec des fleurs et des plantes
+122,3,Que signifie "to build" en français ?,construire;1,Bob le fait dans son métier
+123,3,Comment traduit-on "gâteau" en anglais ?,cake;1;pastry;0.5,Tu en manges pour ton anniversaire
+124,3,Quel mot anglais signifie "bouteille" ?,bottle;1,On y met de l'eau ou du soda
+125,3,Comment dit-on "pont" en anglais ?,bridge;1,Ça permet de traverser une rivière
+126,4,Quel est le contraire de "full" en anglais ?,empty;1,C'est ce qu'est une bouteille sans eau
+127,4,Comment dit-on "Je ne comprends pas" en anglais ?,i don't understand;1;i do not understand;1,Le mot understand est dedans
+128,4,Quel est le pluriel de "tooth" en anglais ?,teeth;1,Ce n'est pas "tooths"
+129,4,Comment dit-on "Je veux apprendre l'anglais" en anglais ?,i want to learn english;1,Le mot learn est dedans
+130,4,Que signifie "to decide" en français ?,décider;1,Ce que tu fais quand tu dois choisir
+131,4,Quel est le contraire de "long" en anglais ?,short;1,Le mot commence par s
+132,4,Comment dit-on "J'ai soif" en anglais ?,i am thirsty;1;i'm thirsty;1,Le mot thirsty est dedans
+133,4,Quel mot anglais désigne un animal qui saute et vit en Australie ?,kangaroo;1,C'est un marsupial
+134,4,Quel est le pluriel irrégulier de "mouse" en anglais ?,mice;1,Ce n'est pas "mouses"
+135,4,Comment dit-on "Je suis fatigué" en anglais ?,i am tired;1;i'm tired;1,Le mot tired est dedans
+136,4,Que signifie "to break" en français ?,casser;1,Ce que tu fais avec un verre quand il tombe
+137,4,Quel est le contraire de "easy" en anglais ?,hard;1;difficult;1,C'est plus compliqué
+138,4,Comment dit-on "Je veux voir un film" en anglais ?,i want to watch a movie;1,Le mot movie est dedans
+139,4,Quel mot anglais désigne un fruit orange et rond ?,orange;1,Le mot est le même en anglais
+140,4,Comment traduit-on "souvenir" (mémoire) en anglais ?,memory;1,Le mot commence par m
+141,3,Comment dit-on "clé" en anglais ?,key;1,Tu l'utilises pour ouvrir une porte
+142,3,Que signifie "to listen" en français ?,écouter;1,C'est ce que tu fais avec de la musique
+143,3,Comment traduit-on "étoile" en anglais ?,star;1,C'est brillant dans le ciel
+144,3,Quel mot anglais signifie "pays" ?,country;1,Nation est son synonyme
+145,2,Comment dit-on "ville" en anglais ?,city;1;town;0.5,C'est plus grand qu'un village
+146,2,Quel est le pluriel irrégulier de "mouse" en anglais ?,mice;1,Ce n'est pas "mouses"
+147,2,Comment dit-on "vent" en anglais ?,wind;1,C'est de l'air qui bouge
+148,2,Quel mot anglais signifie "poisson" ?,fish;1,Ça nage dans l'eau
+149,1,Comment dit-on "feu" en anglais ?,fire;1,C'est chaud et ça brûle
+150,1,Comment dit-on "main" en anglais ?,hand;1,Elle te sert à écrire
+151,1,Comment dit-on "soleil" en anglais ?,sun;1,Celui qui brille dans le ciel
+152,1,Comment dit-on "lune" en anglais ?,moon;1,Celle qui éclaire la nuit
+153,1,Comment dit-on "arbre" en anglais ?,tree;1,C'est grand avec des feuilles
+154,1,Comment dit-on "route" en anglais ?,road;1,Les voitures roulent dessus
+155,1,Comment dit-on "porte" en anglais ?,door;1,Tu la fermes en sortant
+156,2,Quel est le pluriel de "box" en anglais ?,boxes;1,Ce n'est pas "boxs"
+157,2,Comment dit-on "école" en anglais ?,school;1,Un endroit où tu apprends
+158,2,Comment dit-on "pluie" en anglais ?,rain;1,C'est de l'eau qui tombe du ciel
+159,2,Comment dit-on "chaise" en anglais ?,chair;1,Tu t'assois dessus
+160,2,Quel mot anglais signifie "sourire" ?,smile;1,Ce que tu fais quand tu es content
+161,3,Comment dit-on "montagne" en anglais ?,mountain;1,Elle est très haute et difficile à grimper
+162,3,Que signifie "to drive" en français ?,conduire;1,Ce que tu fais avec une voiture
+163,3,Comment traduit-on "valise" en anglais ?,suitcase;1;bag;0.5,Tu l'emmènes en voyage
+164,3,Quel mot anglais désigne un lieu pour voir des films ?,cinema;1;movie theater;1,Un endroit sombre avec un grand écran
+165,3,Comment dit-on "plage" en anglais ?,beach;1,Où tu vas pour bronzer
+166,4,Quel est le contraire de "clean" en anglais ?,dirty;1,C'est ce que tu dois nettoyer
+167,4,Comment dit-on "Je vais dormir" en anglais ?,i am going to sleep;1;i'm going to sleep;1,Le mot sleep est dedans
+168,4,Quel est le pluriel irrégulier de "woman" en anglais ?,women;1,Ce n'est pas "womans"
+169,4,Comment dit-on "Je suis désolé" en anglais ?,i am sorry;1;i'm sorry;1,Le mot sorry est dedans
+170,4,Que signifie "to remember" en français ?,se souvenir;1,Le contraire d'oublier
+171,1,Comment dit-on "nez" en anglais ?,nose;1,Il est au milieu de ton visage
+172,1,Comment dit-on "bras" en anglais ?,arm;1,Il est attaché à ton épaule
+173,1,Comment dit-on "pied" en anglais ?,foot;1,Il te permet de marcher
+174,1,Comment dit-on "doigt" en anglais ?,finger;1,Tu les utilises pour écrire
+175,2,Quel mot anglais désigne une boisson chaude ?,tea;1;coffee;1,Tu la bois le matin ou l'après-midi
+176,2,Comment dit-on "pain" (aliment) en anglais ?,bread;1,Tu le manges avec du beurre
+177,2,Quel mot anglais signifie "gâteau" ?,cake;1,Toujours présent aux anniversaires
+178,2,Comment dit-on "table" en anglais ?,table;1,Le mot est presque identique
+179,2,Quel mot anglais signifie "montre" (accessoire) ?,watch;1,Elle donne l'heure
+180,3,Comment traduit-on "forêt" en anglais ?,forest;1,Un endroit rempli d'arbres
+181,3,Que signifie "to cook" en français ?,cuisiner;1,Ce que fait un chef
+182,3,Comment dit-on "hôpital" en anglais ?,hospital;1,Où vont les malades
+183,3,Quel mot anglais signifie "bibliothèque" (lieu) ?,library;1,Où tu peux emprunter des livres
+184,3,Comment dit-on "carte" (géographie) en anglais ?,map;1,Tu l'utilises pour te repérer
+185,4,Quel est le contraire de "happy" en anglais ?,sad;1,Ce que tu ressens quand tu es triste
+186,4,Comment dit-on "Je dois partir" en anglais ?,i have to leave;1,Le mot leave est dedans
+187,4,Que signifie "to grow" en français ?,grandir;1,Ce que font les plantes et les enfants
+188,4,Comment dit-on "Je me lève tôt" en anglais ?,i wake up early;1,Le mot early est dedans
+189,4,Quel est le pluriel irrégulier de "person" en anglais ?,people;1,Ce n'est pas "persons"
+190,4,Comment traduit-on "jardinier" en anglais ?,gardener;1,Il s'occupe des plantes
+191,1,Comment dit-on "mère" en anglais ?,mother;1;mom;1,Celle qui t'a donné naissance
+192,1,Comment dit-on "père" en anglais ?,father;1;dad;1,Celui qui t'a élevé
+193,2,Comment dit-on "ordinateur portable" en anglais ?,laptop;1,Tu peux l'emporter partout
+194,2,Quel mot anglais désigne un animal qui rugit ?,lion;1,C'est le roi de la jungle
+195,2,Comment dit-on "clé USB" en anglais ?,usb stick;1;flash drive;1,Tu y sauvegardes des fichiers
+196,3,Que signifie "to fall" en français ?,tomber;1,Ce que tu fais si tu glisses
+197,3,Comment dit-on "montre-bracelet" en anglais ?,wristwatch;1,Elle est portée au poignet
+198,3,Quel mot anglais désigne un volcan actif ?,volcano;1,Cela crache de la lave
+199,3,Comment dit-on "problème" en anglais ?,problem;1,Un mot presque identique
+200,4,Comment traduit-on "Je suis en retard" en anglais ?,i am late;1;i'm late;1,Le mot late est dedans
+201,1,Comment dit-on "eau" en anglais ?,water;1,C'est ce que tu bois quand tu as soif
+202,1,Comment dit-on "feu" en anglais ?,fire;1,Cela brûle et chauffe
+203,1,Comment dit-on "neige" en anglais ?,snow;1,Cela tombe en hiver
+204,1,Comment dit-on "vent" en anglais ?,wind;1,Ça souffle dehors
+205,1,Comment dit-on "nuage" en anglais ?,cloud;1,Il flotte dans le ciel
+206,1,Comment dit-on "clé" en anglais ?,key;1,Elle ouvre des portes
+207,1,Comment dit-on "livre" en anglais ?,book;1,Tu le lis
+208,1,Comment dit-on "stylo" en anglais ?,pen;1,Tu écris avec
+209,1,Comment dit-on "papier" en anglais ?,paper;1,Tu y écris dessus
+210,1,Comment dit-on "lit" en anglais ?,bed;1,Tu dors dedans
+211,1,Comment dit-on "mur" en anglais ?,wall;1,Il entoure la pièce
+212,1,Comment dit-on "plafond" en anglais ?,ceiling;1,Au-dessus de ta tête dans une pièce
+213,1,Comment dit-on "fenêtre" en anglais ?,window;1,Tu regardes dehors à travers elle
+214,1,Comment dit-on "chaussure" en anglais ?,shoe;1,Tu la mets à tes pieds
+215,1,Comment dit-on "vêtement" en anglais ?,clothes;1,Tu les portes chaque jour
+216,1,Comment dit-on "chaton" en anglais ?,kitten;1,Un bébé chat
+217,1,Comment dit-on "chiot" en anglais ?,puppy;1,Un bébé chien
+218,1,Comment dit-on "oiseau" en anglais ?,bird;1,Il vole dans le ciel
+219,1,Comment dit-on "poisson" en anglais ?,fish;1,Il nage dans l'eau
+220,1,Comment dit-on "vache" en anglais ?,cow;1,Elle donne du lait
+221,2,Quel mot anglais signifie "argent" ?,money;1,Ce que tu utilises pour acheter
+222,2,Comment dit-on "voiture" en anglais ?,car;1,Elle roule sur la route
+223,2,Quel mot anglais désigne une fleur rouge ?,rose;1,C'est aussi un prénom
+224,2,Comment dit-on "forêt tropicale" en anglais ?,rainforest;1,Où il pleut souvent et il y a beaucoup d'arbres
+225,2,Quel mot anglais signifie "hiver" ?,winter;1,La saison froide
+226,2,Comment dit-on "été" en anglais ?,summer;1,La saison chaude
+227,2,Quel mot anglais désigne une boisson sucrée ?,juice;1;soda;0.5,Tu la bois au goûter
+228,2,Comment dit-on "animal de compagnie" en anglais ?,pet;1,Un animal qui vit avec toi
+229,2,Quel mot anglais désigne un fruit jaune ? Réponse A : Litchi \n Réponse B : banana \n Réponse C : Strawberry,b;1,C'est long et courbé
+230,2,Comment dit-on "fraise" en anglais ?,strawberry;1,Un fruit rouge avec des graines
+231,2,Comment dit-on "pomme" en anglais ?,apple;1,Elle peut être rouge ou verte
+232,2,Quel mot anglais désigne le travail ?,work;1,Ce que font les adultes
+233,2,Comment dit-on "propre" en anglais ?,clean;1,Le contraire de sale
+234,2,Comment dit-on "sale" en anglais ?,dirty;1,Le contraire de propre
+235,2,Quel est l'équivalent anglais de "village" ?,village;1,Le mot est presque le même
+236,3,Comment dit-on "avion" en anglais ?,plane;1;airplane;1,Cela vole très haut
+237,3,Comment dit-on "train" en anglais ?,train;1,Le mot est identique
+238,3,Quel mot anglais désigne un hôpital ?,hospital;1,On y soigne les malades
+239,3,Comment dit-on "maire" en anglais ?,mayor;1,Il dirige la ville
+240,3,Comment traduit-on "banque" en anglais ?,bank;1,Où tu mets ton argent
+241,3,Que signifie "to build" en français ?,construire;1,Ce que fait un maçon
+242,3,Comment dit-on "policier" en anglais ?,police officer;1;policeman;1;cop;0.5,Il fait respecter la loi
+243,3,Quel mot anglais désigne un criminel ?,criminal;1,Il enfreint la loi
+244,3,Comment traduit-on "boulanger" en anglais ?,baker;1,Il fait du pain
+245,3,Que signifie "to break" en français ?,casser;1,Ce que tu fais si tu laisses tomber quelque chose
+246,3,Comment dit-on "marcher" en anglais ?,to walk;1,Ce que tu fais avec tes pieds
+247,3,Quel est le contraire de "high" en anglais ?,low;1,C'est plus bas
+248,3,Comment dit-on "mer" en anglais ?,sea;1,Où tu nages pendant les vacances
+249,3,Quel est le contraire de "early" en anglais ?,late;1,Quand tu n'es pas à l'heure
+250,4,Comment dit-on "je suis en retard" en anglais ?,i am late;1;i'm late;1,Le mot late est dedans
+251,4,Que signifie "to explain" en français ?,expliquer;1,Ce que je fais maintenant
+252,4,Quel est le pluriel de "mouse" en anglais ?,mice;1,Ce n'est pas "mouses"
+253,4,Comment dit-on "J'ai perdu mon livre" en anglais ?,i lost my book;1,Le mot lost est dedans
+254,4,Quel est le contraire de "cold" en anglais ?,hot;1,Le contraire du froid
+255,4,Comment traduit-on "Je dois étudier" en anglais ?,i have to study;1,Le mot study est dedans
+256,4,Que signifie "to forgive" en français ?,pardonner;1,Ce que tu fais après une dispute
+257,4,Comment dit-on "Je suis occupé" en anglais ?,i am busy;1,Le mot busy est dedans
+258,4,Quel est le synonyme anglais de "beautiful" ?,pretty;1;gorgeous;0.5,C'est ce que tu dis à une jolie personne
+259,4,Comment dit-on "parfois" en anglais ?,sometimes;1,Pas toujours mais de temps en temps
+260,4,Que signifie "to improve" en français ?,améliorer;1,Ce que tu veux faire en anglais
+261,4,Comment dit-on "Je n'ai pas de temps" en anglais ?,i have no time;1,Le mot time est dedans
+262,4,Quel est le contraire de "rich" en anglais ?,poor;1,Quand tu n'as pas beaucoup d'argent
+263,4,Comment traduit-on "silencieux" en anglais ?,quiet;1;silent;1,C'est le contraire de bruyant
+264,4,Comment dit-on "Je rêve souvent" en anglais ?,i often dream;1,Le mot often est dedans
+265,4,Que signifie "to guess" en français ?,deviner;1,Ce que tu fais quand tu n'es pas sûr
+266,4,Comment dit-on "le ciel est bleu" en anglais ?,the sky is blue;1,Le mot sky est dedans
+267,4,Quel est le pluriel de "tooth" en anglais ?,teeth;1,Ce n'est pas "tooths"
+268,4,Comment dit-on "Je veux apprendre" en anglais ?,i want to learn;1,Le mot learn est dedans
+269,4,Que signifie "to describe" en français ?,décrire;1,Ce que tu fais avec des détails
+270,4,Comment dit-on "je ne comprends pas" en anglais ?,i don't understand;1,Le mot understand est dedans
+271,4,Quel est le contraire de "hard" en anglais ?,easy;1,C'est plus simple
+272,4,Comment traduit-on "Je suis fatigué" en anglais ?,i am tired;1,Le mot tired est dedans
+273,4,Que signifie "to decide" en français ?,décider;1,Ce que tu fais avant d'agir
+274,4,Comment dit-on "la pluie tombe" en anglais ?,the rain is falling;1,Le mot rain est dedans
+275,4,Quel est le pluriel de "person" en anglais ?,people;1,Ce n'est pas "persons"
+276,4,Comment tra;duit-on "Je dois partir" en anglais ?,i have to leave;1,Le mot leave est dedans
+277,4,Que signifie "to try" en français ?,essayer;1,Ce que tu fais avant de réussir
+278,4,Comment dit-on "Il fait froid" en anglais ?,it is cold;1,Le mot cold est dedans
+279,4,Quel est le contraire de "noir" en anglais ?,white;1,C'est la couleur opposée
+280,4,Comment traduit-on "Je t'attends" en anglais ?,i am waiting for you;1,Le mot waiting est dedans
+281,4,Que signifie "to create" en français ?,créer;1,Ce que fait un artiste
+282,4,Comment dit-on "Il fait chaud" en anglais ?,it is hot;1,Le mot hot est dedans
+283,4,Quel est le pluriel irrégulier de "woman" en anglais ?,women;1,Ce n'est pas "womans"
+284,4,Comment traduit-on "Je suis heureux" en anglais ?,i am happy;1,Le mot happy est dedans
+285,4,Que signifie "to answer" en français ?,répondre;1,Ce que tu fais à une question
+286,4,Comment dit-on "J'ai faim" en anglais ?,i am hungry;1,Le mot hungry est dedans
+287,4,Quel est le contraire de "long" en anglais ?,short;1,Ce n'est pas grand
+288,4,Comment traduit-on "Je suis en colère" en anglais ?,i am angry;1,Le mot angry est dedans
+289,4,Que signifie "to travel" en français ?,voyager;1,Ce que tu fais pour visiter d'autres pays
+290,4,Comment dit-on "Il pleut" en anglais ?,it is raining;1,Le mot raining est dedans
+291,4,Quel est le pluriel irrégulier de "goose" en anglais ?,geese;1,Ce n'est pas "gooses"
+292,4,Comment traduit-on "Je suis perdu" en anglais ?,i am lost;1,Le mot lost est dedans
+293,4,Que signifie "to listen" en français ?,écouter;1,Ce que tu fais avec tes oreilles
+294,4,Comment dit-on "Il neige" en anglais ?,it is snowing;1,Le mot snowing est dedans
+295,4,Quel est le contraire de "happy" en anglais ?,sad;1,Le contraire de joyeux
+296,4,Comment traduit-on "Je suis prêt" en anglais ?,i am ready;1,Le mot ready est dedans
+297,4,Que signifie "to learn" en français ?,apprendre;1,Ce que tu fais en ce moment
+298,4,Comment dit-on "Je suis malade" en anglais ?,i am sick;1,Le mot sick est dedans
+299,4,Quel est le contraire de "big" en anglais ?,small;1,C'est plus petit
+300,4,Comment traduit-on "Je vais bien" en anglais ?,i am fine;1,Le mot fine est dedans

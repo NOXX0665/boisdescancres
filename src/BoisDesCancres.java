@@ -37,11 +37,9 @@ class BoisDesCancres extends Program {
         choix = "-1";
 
         clearScreen();
-        text("green");
-        println("Vous vous réveillez dans une étrange forêt... Vous voyez des cancres partout autour de vous !\nOn dirait que vous devez répondre à leurs questions pour vous échapper de ce lieu maudit.");
-        text("white");
+        printlncolor("Vous vous réveillez dans une étrange forêt... Vous voyez des cancres partout autour de vous !\nOn dirait que vous devez répondre à leurs questions pour vous échapper de ce lieu maudit.", "green");
 
-        while (!equals(choix, "4")) { //Si le choix=3, cela veut dire que le joueur veut sauvegarder et quitter.
+        while (!equals(choix, "4")) { //Si le choix=4, cela veut dire que le joueur veut sauvegarder et quitter.
             //Menu du jeu :
             println("\n\nQue voulez-vous faire ?");
             println("1. Continuer votre chemin");
@@ -54,6 +52,8 @@ class BoisDesCancres extends Program {
                 clearScreen();
                 //Choix d'une question parmis toutes les questions dans le fichier ../ressources/questions.csv
                 Question question = questionAleatoire(questionsAdaptees(joueur), joueur);
+                // Question question = questionAleatoire(new int[]{301}, joueur);
+                //waypointvenere
 
                 //On pose la question
                 poserQuestion(question, joueur);
@@ -71,11 +71,8 @@ class BoisDesCancres extends Program {
             } else if (equals(choix, "3")) {
                 if(arrayEquals(questionRevisions(joueur), aucunId())){
                     clearScreen();
-                    text("red");
-                    println("Impossible de réviser : vous connaissez déjà tout !");
-                    text("white");
-                }
-                else{
+                    printlncolor("Impossible de réviser : vous connaissez déjà tout !","red");
+                } else {
                     clearScreen();
                     Question question = questionAleatoire(questionRevisions(joueur), joueur);
                     poserQuestion(question, joueur);
@@ -89,12 +86,10 @@ class BoisDesCancres extends Program {
         }
 
         //Sauvegarde et quitter
-        text("yellow");
-        println("Sauvegarde en cours...\nNe fermez pas le jeu !");
+        printlncolor("Sauvegarde en cours...\nNe fermez pas le jeu !", "yellow");
         saveJoueur(joueur, joueur.nom+".csv");
         clearScreen();
-        text("green");
-        println("Partie sauvegardée. Au revoir !");
+        printlncolor("Partie sauvegardée. Au revoir !","green");
     }
 
 
@@ -109,7 +104,6 @@ class BoisDesCancres extends Program {
         clearScreen();
         println("Quelle sauvegarde voulez-vous charger ?");
         afficherListeSave();
-        print("> ");
         String choixSave = toLowerCase(demanderValeur(listeSave()));
         joueur=chargerJoueur(choixSave+".csv");
         return joueur;
@@ -137,9 +131,7 @@ class BoisDesCancres extends Program {
     boolean poserQuestion(Question question, Joueur joueur) {
         //Pose une question au joueur en vérifiant s'il a assez de points bonus pour passer
         
-        text("green");
-        println(question.question);
-        text("white");
+        printlncolor(question.question,"green");
 
         if (joueur.pointsBonus>0) {
             println("\nIl vous reste "+joueur.pointsBonus+" points bonus.\nVous pouvez passer la question en tapant 'passer' ou demander un indice en tapant 'indice'.\n");
@@ -163,9 +155,8 @@ class BoisDesCancres extends Program {
 
         if (coeffReponse(question, reponse)!=-1) { //Si c'est une bonne réponse
             clearScreen();
-            text("green"); // On passe le texte en vert
-            println("Bonne réponse !\n\nVous avez gagné "+points+" points.");
-            text("white"); // On repasse le texte en blanc
+            printlncolor("Bonne réponse !\n\nVous avez gagné "+points+" points.","green");
+            
             // println("\nVous avez répondu en "+temps/1000+" secondes.");
             ajouterPointsBonus(question, joueur);
 
@@ -202,11 +193,10 @@ class BoisDesCancres extends Program {
 
         } else { //Si ce n'est pas la bonne réponse
             //clearScreen(); //waypoint
-            text("red"); // On passe le texte en rouge
-            println("Mauvaise réponse...");
-            println("La bonne réponse était : "+question.reponses[0][0]);
-            println("\nVous avez perdu "+abs(points)+" points :(");
-            text("white"); // On repasse le texte en blanc
+            printlncolor("Mauvaise réponse...","red");
+            printlncolor("La bonne réponse était : "+question.reponses[0][0],"red");
+            printlncolor("\nVous avez perdu "+abs(points)+" points :(","red");
+            println("Votre réponse : "+reponse);
             joueur.score+=points;
             question.nbRatee++;
             return true;
@@ -306,8 +296,15 @@ class BoisDesCancres extends Program {
             reponsesFinales[i][0] = listeReponses[2*i];
             reponsesFinales[i][1] = listeReponses[2*i+1];
         }
-
         return reponsesFinales;
+    }
+
+    void testGetReponses(){
+        String[][] reponses = new String[][]{{"was","1"},{"were","1"}};
+        assertTrue(arrayEquals(reponses,getReponses(15)));
+        assertFalse(arrayEquals(reponses,getReponses(16)));
+        reponses[0][1]="2";
+        assertFalse(arrayEquals(reponses,getReponses(15)));
     }
 
     String[] split(String chaine, char separateur) {
@@ -424,28 +421,10 @@ class BoisDesCancres extends Program {
         assertEquals(coeffReponse(ques,"good afternoon"),1.0);
         assertEquals(coeffReponse(ques,"hello"),0.5);
         assertEquals(coeffReponse(ques,"cat"),-1.0);
-    }
-
-    String toString(String[][] tab) {
-        String chaine = "";
-        for (int i=0; i<length(tab); i++) {
-            chaine = chaine + tab[i][0] + " ";
-        }
-        return chaine;
-    }
-
-    String toString(Question question) {
-        String chaine = "";
-        chaine = chaine + "ID : " + question.id + "\n";
-        chaine = chaine + "Difficulté : " + question.difficulte + "\n";
-        chaine = chaine + "Question : " + question.question + "\n";
-        chaine = chaine + "Réponses : " + toString(question.reponses) + "\n";
-        chaine = chaine + "Indice : " + question.indice + "\n";
-        chaine = chaine + "Nombre de fois rencontrée : " + question.nbRencontree + "\n";
-        chaine = chaine + "Nombre de fois réussie : " + question.nbReussie + "\n";
-        chaine = chaine + "Nombre de fois passée : " + question.nbSkip + "\n";
-        chaine = chaine + "Nombre de fois ratée : " + question.nbRatee + "\n";
-        return chaine;
+        ques = creerQuestion(30,"nouveau");
+        println(ques.reponses[0][0]);
+        println("I don't like vegetables");
+        assertEquals(coeffReponse(ques,"I don't like vegetables"),1.0);
     }
 
 
@@ -465,6 +444,10 @@ class BoisDesCancres extends Program {
         String[] listeSave = listeSave();
         for(int i = 0 ; i < length(listeSave) ; i++){
             println(listeSave[i]);
+        }
+
+        if (length(listeSave)==0) {
+            printlncolor("Aucune sauvegarde trouvé", "red");
         }
 
         // String[] tabFichiers = getAllFilesFromDirectory(CHEMIN_SAUVEGARDES);
@@ -568,6 +551,20 @@ class BoisDesCancres extends Program {
         println("Votre nombre de points bonus : " + joueur.pointsBonus);
     }
 
+    // String scoreToString(int score) {
+    //     String chaine = "";
+
+    //     for (int i=1;i<score/100;i++) {
+    //         chaine+="■";
+    //     } 
+
+    //     for (int i=1; i<100-length(chaine);i++) {
+    //         chaine+="☐";
+    //     }
+
+    //     return chaine;
+    // }
+
     void afficherStatAvancee(Joueur joueur){
         Question[] questions = joueur.listeQuestions;
         println("Voici vos statistiques pour chacune des questions implémentées :");
@@ -603,7 +600,7 @@ class BoisDesCancres extends Program {
         println("difference : " + differenceNiveau);
         //utilisation du coefficient de la réponse (1 si elle est bonne, 0.5 si elle est moins bien, -1 si elle est fausse)
         points = (int)(points*coefficient);
-        print("Nombre de points après passage du coefficient : " + points);
+        println("Nombre de points après passage du coefficient : " + points);
         if(points > 0){
             //calcul des points en cas de réussite
             if (differenceNiveau == 1){
@@ -646,7 +643,11 @@ class BoisDesCancres extends Program {
         return points;
     }
 
-
+    void testCalculerPoints(){
+        assertEquals(calculerPoints(2,2,50000.0,1),10);
+        assertEquals(calculerPoints(2,3,50000,1),5);
+    }
+    //waypoint
 
     /////////////////////////////////////
     // Fonctions pour les points bonus //
@@ -721,21 +722,6 @@ class BoisDesCancres extends Program {
         }
     }
 
-
-    String toString(int[] tab) {
-        String chaine = "";
-        for (int i=0; i<length(tab); i++) {
-            chaine = chaine + tab[i] + " ";
-        }
-        return chaine;
-    }
-
-    void testToString() {
-        assertEquals("1 2 3 ", toString(new int[]{1,2,3}));
-        assertEquals("781 0 1 ", toString(new int[]{781,0,1}));
-        assertEquals("-34 0 1 ", toString(new int[]{-34,0,1}));
-    }
-
     boolean arrayEquals(int[] tab1, int[] tab2){
         boolean result = true;
         if(length(tab1) !=length(tab2)){
@@ -751,11 +737,45 @@ class BoisDesCancres extends Program {
         return result;
     }
 
+    boolean arrayEquals(String[][] tab1,String[][] tab2){
+        if((length(tab1,1) != length(tab2,1)) || (length(tab1,2) != length(tab2,2))){
+            return false;
+        } else {
+            for(int i = 0 ; i < length(tab1,1);i++){
+                for(int j = 0 ; j < length(tab1,2) ; j++){
+                    if(!equals(tab1[i][j],tab2[i][j])){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    void testArrayEqualsDoubleString() {
+        String[][] tabVide = new String[][]{{}};
+        String[][] tab1 = new String[][]{{"bonjour","bonjour"},{"hello","test"}};
+        String[][] tab2 = new String[][]{{"bonjour","bonjour"},{"hello","test"}};
+        String[][] tab3 = new String[][]{{"hello","hjhfd"}};
+
+        assertFalse(arrayEquals(tabVide,tab1)); // Tableau pas vide contre tableau vide
+        assertTrue(arrayEquals(tab1,tab2)); //
+        assertFalse(arrayEquals(tab1,tab3));
+
+    }
+
     void testArrayEquals() {
         assertTrue(arrayEquals(new int[]{1,2,3}, new int[]{1,2,3}));
         assertFalse(arrayEquals(new int[]{1,2,3}, new int[]{1,2,4}));
         assertFalse(arrayEquals(new int[]{1,2,3}, new int[]{1,2,3,4}));
         assertTrue(arrayEquals(new int[]{}, new int[]{}));
         assertFalse(arrayEquals(new int[]{1}, new int[]{}));
+    }
+
+    void printlncolor(String text, String color) {
+        // Cette fonction print une seule ligne dans la couleur color
+        text(color);
+        println(text);
+        text("white");
     }
 }
