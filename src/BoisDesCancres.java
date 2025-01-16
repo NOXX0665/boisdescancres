@@ -154,7 +154,7 @@ class BoisDesCancres extends Program {
         
 
         if (coeffReponse(question, reponse)!=-1) { //Si c'est une bonne réponse
-            clearScreen();
+            // clearScreen(); //waypomodif
             printlncolor("Bonne réponse !\n\nVous avez gagné "+points+" points.","green");
             
             // println("\nVous avez répondu en "+temps/1000+" secondes.");
@@ -546,24 +546,26 @@ class BoisDesCancres extends Program {
         println("Vos statistiques :");
         println("Votre pseudo : " + joueur.nom);
         println("Votre score : " + joueur.score);
+        println("Avancement avant le niveau " + (joueur.niveau+1) + " : " + scoreToString(joueur.score));
         // Quand on se sera mis d'accord sur l'xp nécessaire pour monter de niveau, on pourra rajouter un affichage de l'avancement avant le prochain avec les petits carrés ☐ et ■
         println("Votre niveau : " + joueur.niveau);
         println("Votre nombre de points bonus : " + joueur.pointsBonus);
     }
 
-    // String scoreToString(int score) {
-    //     String chaine = "";
+//waypoint
+    String scoreToString(int score) {
+        String chaine = "";
 
-    //     for (int i=1;i<score/100;i++) {
-    //         chaine+="■";
-    //     } 
+        for (int i=0;i<score%100;i++) {
+            chaine+="■";
+        } 
 
-    //     for (int i=1; i<100-length(chaine);i++) {
-    //         chaine+="☐";
-    //     }
+        for (int i=0; i<100-length(chaine);i++) {
+            chaine+="☐";
+        }
 
-    //     return chaine;
-    // }
+        return chaine;
+    }
 
     void afficherStatAvancee(Joueur joueur){
         Question[] questions = joueur.listeQuestions;
@@ -581,7 +583,7 @@ class BoisDesCancres extends Program {
     }
 
     int scoreIntoNiveau(int score){
-        return (score+1)/100 +1;
+        return (score+1)/100;
     }
 
     void testScoreIntoNiveau() {
@@ -621,8 +623,8 @@ class BoisDesCancres extends Program {
             }
             //multiplicateur de temps : Si on mets moins de 10 secondes, on gagne un multiplicateur de points qui équivaut à +1% par seconde restantes (exemple : on répond bien en 1 seconde, on a un bonus de +9%)
             if(temps <10000){
-                points =(int)(points * (1.1 - (temps/10000)));
-                println("Tu as pris " + temps/1000 + " secondes donc on fait x" + (1.1 - (temps/10000)));
+                points =(int)(points * (1.5 - (temps/20000)));
+                println("Tu as pris " + temps/1000 + " secondes donc on fait x" + (1.5 - (temps/20000)));
             }
         }
         else{
