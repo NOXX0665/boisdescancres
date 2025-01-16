@@ -599,7 +599,6 @@ class BoisDesCancres extends Program {
     int calculerPoints(int niveauQuestion, int niveauJoueur, double temps, double coefficient){
         int points = POINTS;
         int differenceNiveau = niveauQuestion-niveauJoueur;
-        println("difference : " + differenceNiveau);
         //utilisation du coefficient de la réponse (1 si elle est bonne, 0.5 si elle est moins bien, -1 si elle est fausse)
         points = (int)(points*coefficient);
         println("Nombre de points après passage du coefficient : " + points);
