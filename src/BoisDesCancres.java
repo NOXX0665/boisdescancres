@@ -16,10 +16,7 @@ class BoisDesCancres extends Program {
         afficherImage("ressources/ascii_art/logo.txt");
         text("white");
 
-        println("Bienvenue dans le Bois Des Cancres !");
-        println("1. Nouvelle partie");
-        println("2. Ouvrir une sauvegarde");
-        println("3. Quitter le jeu");
+        println("Bienvenue dans le Bois Des Cancres !\n1. Nouvelle partie\n2. Charger une sauvegarde\n3. Quitter le jeu");
         String choix = demanderValeur(new String[]{"1","2","3"});
             
         if (choix.equals("3")) {
@@ -32,20 +29,15 @@ class BoisDesCancres extends Program {
         }
         
         println("C'est parti pour le niveau "+joueur.niveau+" !");
-        delay(1000);
+        delay(750);
 
         choix = "-1";
-
         clearScreen();
         printlncolor("Vous vous réveillez dans une étrange forêt... Vous voyez des cancres partout autour de vous !\nOn dirait que vous devez répondre à leurs questions pour vous échapper de ce lieu maudit.", "green");
 
-        while (!equals(choix, "4")) { //Si le choix=4, cela veut dire que le joueur veut sauvegarder et quitter.
+        while (!equals(choix, "4")) { //Si le choix est 4, cela veut dire que le joueur veut sauvegarder et quitter.
             //Menu du jeu :
-            println("\n\nQue voulez-vous faire ?");
-            println("1. Continuer votre chemin");
-            println("2. Regarder vos statistiques");
-            println("3. Réviser");
-            println("4. Sauvegarder et quitter");
+            println("\n\nQue voulez-vous faire ?\n1. Continuer votre chemin\n2. Regarder vos statistiques\n3. Réviser\n4. Sauvegarder et quitter");
             choix = demanderValeur(new String[]{"1","2","3","4"});
 
             if (equals(choix, "1")) {
@@ -105,6 +97,7 @@ class BoisDesCancres extends Program {
         println("Quelle sauvegarde voulez-vous charger ?");
         afficherListeSave();
         String choixSave = toLowerCase(demanderValeur(listeSave()));
+        printlncolor("Chargement...","yellow");
         joueur=chargerJoueur(choixSave+".csv");
         return joueur;
     }
@@ -153,16 +146,15 @@ class BoisDesCancres extends Program {
         int points = calculerPoints(question.difficulte, joueur.niveau, temps, coefficient);
         
 
-        if (coeffReponse(question, reponse)!=-1) { //Si c'est une bonne réponse
-            // clearScreen(); //waypomodif
-            printlncolor("Bonne réponse !\n\nVous avez gagné "+points+" points.","green");
+        if (coefficient!=-1) { //Si c'est une bonne réponse
+            printlncolor("\nBonne réponse !\n\nVous avez gagné "+points+" points.","green");
             
-            // println("\nVous avez répondu en "+temps/1000+" secondes.");
             ajouterPointsBonus(question, joueur);
 
             joueur.score+=points;
 
             question.nbReussie++;
+            delay(750);
             return true;
 
         } else if (equals(reponse, "passer")) { //Si le joueur veut passer la question
@@ -192,13 +184,12 @@ class BoisDesCancres extends Program {
             }
 
         } else { //Si ce n'est pas la bonne réponse
-            //clearScreen();
-            printlncolor("Mauvaise réponse...","red");
+            printlncolor("\nMauvaise réponse...","red");
             printlncolor("La bonne réponse était : "+question.reponses[0][0],"red");
             printlncolor("\nVous avez perdu "+abs(points)+" points :(","red");
-            println("Votre réponse : "+reponse);
             joueur.score+=points;
             question.nbRatee++;
+            delay(750);
             return true;
         }
     }
@@ -592,43 +583,34 @@ class BoisDesCancres extends Program {
         int differenceNiveau = niveauQuestion-niveauJoueur;
         //utilisation du coefficient de la réponse (1 si elle est bonne, 0.5 si elle est moins bien, -1 si elle est fausse)
         points = (int)(points*coefficient);
-        println("Nombre de points après passage du coefficient : " + points);
         if(points > 0){
             //calcul des points en cas de réussite
             if (differenceNiveau == 1){
                 points = (int)(points *1.5);
-                println("La question est 1 niveau plus haut donc on fait x1.5");
             }
             else if(differenceNiveau == 2){
                 points = (int)(points*2);
-                println("La question est 2 niveau plus haut donc on fait x2");
             }
             else if(differenceNiveau == -1){
                 points = (int)(points*0.5);
-                println("La question est 1 niveau plus bas donc on fait x0.5");
             }
             else if(differenceNiveau == -2){
                 points = (int)(points*0.25);
-                println("La question est 2 niveau plus bas donc on fait x0.25");
             }
             //multiplicateur de temps : Si on mets moins de 10 secondes, on gagne un multiplicateur de points qui équivaut à +1% par seconde restantes (exemple : on répond bien en 1 seconde, on a un bonus de +9%)
             if(temps <10000){
                 points =(int)(points * (1.5 - (temps/20000)));
-                println("Tu as pris " + temps/1000 + " secondes donc on fait x" + (1.5 - (temps/20000)));
             }
         }
         else{
             if (differenceNiveau == 1){
                 points = (int)(points *0.25);
-                println("La question est 1 niveau plus haut donc on fait x0.25");
             }
             else if(differenceNiveau == 2){
                 points = (int)(points*0.125);
-                println("La question est 2 niveau plus haut donc on fait x0.125");
             }
             else if(differenceNiveau == -1){
                 points = (int)(points*0.75);
-                println("La question est 1 niveau plus bas donc on fait x0.75");
             }
         }
         // print("Points gagnés : " + points);
@@ -679,7 +661,12 @@ class BoisDesCancres extends Program {
                 valide = valide || equals(valeur, ""+valeursPossibles[i]);
             }
             if (!valide) {
-                println("\n\nValeur invalide. Veuillez réessayer.");
+                printlncolor("\n\nValeur invalide. Veuillez réessayer.","red");
+                println("Pour rappel, les valeurs possibles sont : ");
+                for (int i=0; i<length(valeursPossibles); i++) {
+                    print(valeursPossibles[i]+" ");
+                }
+                println("");
             }
         }
         return stringToInt(valeur);
@@ -698,7 +685,11 @@ class BoisDesCancres extends Program {
                 valide = valide || equals(valeur, valeursPossibles[i]);
             }
             if (!valide) {
-                println("Valeur invalide. Veuillez réessayer.");
+                printlncolor("Valeur invalide. Veuillez réessayer.","red");
+                println("Pour rappel, les valeurs possibles sont : ");
+                for (int i=0; i<length(valeursPossibles); i++) {
+                    print(valeursPossibles[i]+" ");
+                }
             }
         }
         return valeur;

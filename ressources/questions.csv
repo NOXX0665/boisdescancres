@@ -207,7 +207,7 @@ id,difficulté,question,liste_reponses,indice
 206,1,Comment dit-on "clé" en anglais ?,key;1,Elle ouvre des portes
 207,1,Comment dit-on "livre" en anglais ?,book;1,Tu le lis
 208,1,Comment dit-on "stylo" en anglais ?,pen;1,Tu écris avec
-209,1,Comment dit-on "papier" en anglais ?,paper;1,Tu y écris dessus
+209,1,Comment dit-on "papier" en anglais : Réponse A : paper | Réponse B : papper | Réponse C : peper | Réponse D : papperr,a;1;paper;1,Tu y écris dessus
 210,1,Comment dit-on "lit" en anglais ?,bed;1,Tu dors dedans
 211,1,Comment dit-on "mur" en anglais ?,wall;1,Il entoure la pièce
 212,1,Comment dit-on "plafond" en anglais ?,ceiling;1,Au-dessus de ta tête dans une pièce
@@ -227,7 +227,7 @@ id,difficulté,question,liste_reponses,indice
 226,2,Comment dit-on "été" en anglais ?,summer;1,La saison chaude
 227,2,Quel mot anglais désigne une boisson sucrée ?,juice;1;soda;0.5,Tu la bois au goûter
 228,2,Comment dit-on "animal de compagnie" en anglais ?,pet;1,Un animal qui vit avec toi
-229,2,Quel mot anglais désigne un fruit jaune ? Réponse A : Litchi \n Réponse B : banana \n Réponse C : Strawberry,b;1,C'est long et courbé
+229,2,Quel mot anglais désigne un fruit jaune ? Réponse A : Litchi | Réponse B : banana | Réponse C : Strawberry,b;1;banana;1,C'est long et courbé
 230,2,Comment dit-on "fraise" en anglais ?,strawberry;1,Un fruit rouge avec des graines
 231,2,Comment dit-on "pomme" en anglais ?,apple;1,Elle peut être rouge ou verte
 232,2,Quel mot anglais désigne le travail ?,work;1,Ce que font les adultes
