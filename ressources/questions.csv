@@ -270,32 +270,32 @@ id,difficulté,question,liste_reponses,indice
 269,4,Que signifie "to describe" en français ?,décrire;1,Ce que tu fais avec des détails
 270,4,Comment dit-on "je ne comprends pas" en anglais ?,i don't understand;1,Le mot understand est dedans
 271,4,Quel est le contraire de "hard" en anglais ?,easy;1,C'est plus simple
-272,4,Comment traduit-on "Je suis fatigué" en anglais ?,i am tired;1,Le mot tired est dedans
+272,4,Comment traduit-on "Je suis fatigué" en anglais ?,i am tired;1;i'm tired;1,Le mot tired est dedans
 273,4,Que signifie "to decide" en français ?,décider;1,Ce que tu fais avant d'agir
 274,4,Comment dit-on "la pluie tombe" en anglais ?,the rain is falling;1,Le mot rain est dedans
 275,4,Quel est le pluriel de "person" en anglais ?,people;1,Ce n'est pas "persons"
 276,4,Comment tra;duit-on "Je dois partir" en anglais ?,i have to leave;1,Le mot leave est dedans
 277,4,Que signifie "to try" en français ?,essayer;1,Ce que tu fais avant de réussir
-278,4,Comment dit-on "Il fait froid" en anglais ?,it is cold;1,Le mot cold est dedans
+278,4,Comment dit-on "Il fait froid" en anglais ?,it is cold;1;it's cold;1,Le mot cold est dedans
 279,4,Quel est le contraire de "noir" en anglais ?,white;1,C'est la couleur opposée
-280,4,Comment traduit-on "Je t'attends" en anglais ?,i am waiting for you;1,Le mot waiting est dedans
+280,4,Comment traduit-on "Je t'attends" en anglais ?,i am waiting for you;1;i'm waiting for you;1,Le mot waiting est dedans
 281,4,Que signifie "to create" en français ?,créer;1,Ce que fait un artiste
-282,4,Comment dit-on "Il fait chaud" en anglais ?,it is hot;1,Le mot hot est dedans
+282,4,Comment dit-on "Il fait chaud" en anglais ?,it is hot;1;it's hot;1,Le mot hot est dedans
 283,4,Quel est le pluriel irrégulier de "woman" en anglais ?,women;1,Ce n'est pas "womans"
-284,4,Comment traduit-on "Je suis heureux" en anglais ?,i am happy;1,Le mot happy est dedans
+284,4,Comment traduit-on "Je suis heureux" en anglais ?,i am happy;1;i'm happy;1,Le mot happy est dedans
 285,4,Que signifie "to answer" en français ?,répondre;1,Ce que tu fais à une question
-286,4,Comment dit-on "J'ai faim" en anglais ?,i am hungry;1,Le mot hungry est dedans
+286,4,Comment dit-on "J'ai faim" en anglais ?,i am hungry;1;i'm hungry;1,Le mot hungry est dedans
 287,4,Quel est le contraire de "long" en anglais ?,short;1,Ce n'est pas grand
-288,4,Comment traduit-on "Je suis en colère" en anglais ?,i am angry;1,Le mot angry est dedans
+288,4,Comment traduit-on "Je suis en colère" en anglais ?,i am angry;1;i'm angry;1,Le mot angry est dedans
 289,4,Que signifie "to travel" en français ?,voyager;1,Ce que tu fais pour visiter d'autres pays
-290,4,Comment dit-on "Il pleut" en anglais ?,it is raining;1,Le mot raining est dedans
+290,4,Comment dit-on "Il pleut" en anglais ?,it is raining;1;it's raining;1,Le mot raining est dedans
 291,4,Quel est le pluriel irrégulier de "goose" en anglais ?,geese;1,Ce n'est pas "gooses"
-292,4,Comment traduit-on "Je suis perdu" en anglais ?,i am lost;1,Le mot lost est dedans
+292,4,Comment traduit-on "Je suis perdu" en anglais ?,i am lost;1;i'm lost;1,Le mot lost est dedans
 293,4,Que signifie "to listen" en français ?,écouter;1,Ce que tu fais avec tes oreilles
-294,4,Comment dit-on "Il neige" en anglais ?,it is snowing;1,Le mot snowing est dedans
+294,4,Comment dit-on "Il neige" en anglais ?,it is snowing;1;it's snowing;1,Le mot snowing est dedans
 295,4,Quel est le contraire de "happy" en anglais ?,sad;1,Le contraire de joyeux
-296,4,Comment traduit-on "Je suis prêt" en anglais ?,i am ready;1,Le mot ready est dedans
+296,4,Comment traduit-on "Je suis prêt" en anglais ?,i am ready;1;i'm ready;1,Le mot ready est dedans
 297,4,Que signifie "to learn" en français ?,apprendre;1,Ce que tu fais en ce moment
-298,4,Comment dit-on "Je suis malade" en anglais ?,i am sick;1,Le mot sick est dedans
+298,4,Comment dit-on "Je suis malade" en anglais ?,i am sick;1;i'm sick;1,Le mot sick est dedans
 299,4,Quel est le contraire de "big" en anglais ?,small;1,C'est plus petit
-300,4,Comment traduit-on "Je vais bien" en anglais ?,i am fine;1,Le mot fine est dedans
+300,4,Comment traduit-on "Je vais bien" en anglais ?,i am fine;1;i'm fine;1,Le mot fine est dedans
