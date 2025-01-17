@@ -53,7 +53,6 @@ class BoisDesCancres extends Program {
                 //Choix d'une question parmis toutes les questions dans le fichier ../ressources/questions.csv
                 Question question = questionAleatoire(questionsAdaptees(joueur), joueur);
                 // Question question = questionAleatoire(new int[]{301}, joueur);
-                //waypointvenere
 
                 //On pose la question
                 poserQuestion(question, joueur);
@@ -192,7 +191,7 @@ class BoisDesCancres extends Program {
             }
 
         } else { //Si ce n'est pas la bonne réponse
-            //clearScreen(); //waypoint
+            //clearScreen();
             printlncolor("Mauvaise réponse...","red");
             printlncolor("La bonne réponse était : "+question.reponses[0][0],"red");
             printlncolor("\nVous avez perdu "+abs(points)+" points :(","red");
@@ -552,7 +551,6 @@ class BoisDesCancres extends Program {
         println("Votre nombre de points bonus : " + joueur.pointsBonus);
     }
 
-//waypoint
     String scoreToString(int score) {
         String chaine = "";
 
@@ -648,7 +646,6 @@ class BoisDesCancres extends Program {
         assertEquals(calculerPoints(2,2,50000.0,1),10);
         assertEquals(calculerPoints(2,3,50000,1),5);
     }
-    //waypoint
 
     /////////////////////////////////////
     // Fonctions pour les points bonus //
