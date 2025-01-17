@@ -72,6 +72,7 @@ class BoisDesCancres extends Program {
                     clearScreen();
                     printlncolor("Impossible de réviser : vous connaissez déjà tout !","red");
                 } else {
+                    printlncolor("Chargement...","yellow");
                     clearScreen();
                     Question question = questionAleatoire(questionRevisions(joueur), joueur);
                     poserQuestion(question, joueur);
@@ -473,21 +474,12 @@ class BoisDesCancres extends Program {
         String nom = readString();
         clearScreen();
 
-        boolean valide = false;
-        String niveauString = "";
-
-        clearScreen();
         println("Bienvenue, "+nom+", quel niveau pensez-vous avoir en Anglais ?\n1. Mauvais\n2. Moyen\n3. Bon\n4. Très bon");
-        niveauString = demanderValeur(new String[]{"1","2","3","4"});
-        if(equals(niveauString,"1") || equals(niveauString,"2") || equals(niveauString,"3") || equals(niveauString,"4")){
-            valide = true;
-        }
-        int niveau = stringToInt(niveauString);
+        int niveau = demanderValeur(new int[]{1,2,3,4});
         int score = niveau*100;
 
-        //Il faudrait se mettre d'accord sur combien de points il faut pour chaque niveau
-        //Dans ce cas, si le joueur dis qu'il est très bon, il faut lui mettre combien de points ?
         int nbQuestions = rowCount(loadCSV(CHEMIN_QUESTIONS));
+        printlncolor("\nChargement...","yellow");
         Question[] listeQuestions = initToutesQuestions("nouveau"); //On passe "nouveau" pour dire qu'on crée un nouveau joueur. Sinon, la fonction chercherait des stats pour un joueur dans un fichier qui n'existe pas.
         return newJoueur(nom, score, niveau, 3, listeQuestions);
     }
@@ -595,6 +587,7 @@ class BoisDesCancres extends Program {
 
 
     int calculerPoints(int niveauQuestion, int niveauJoueur, double temps, double coefficient){
+        //Cette fonction calcul le nombre de points gagnés par le joueur en fonction de la difficulté de la question, de son niveau, du temps qu'il a mis à répondre et du coefficient de la réponse
         int points = POINTS;
         int differenceNiveau = niveauQuestion-niveauJoueur;
         //utilisation du coefficient de la réponse (1 si elle est bonne, 0.5 si elle est moins bien, -1 si elle est fausse)
