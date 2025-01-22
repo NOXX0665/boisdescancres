@@ -647,6 +647,8 @@ class BoisDesCancres extends Program {
 
 
     /////////////////////////////////////
+    //////   Fonction utilitaires   /////
+    /////////////////////////////////////
 
     int demanderValeur(int[] valeursPossibles) {
         //Demande une valeur à l'utilisateur et vérifie si elle est dans le tableau de valeurs possibles
