@@ -6,7 +6,7 @@ class BoisDesCancres extends Program {
     final String CHEMIN_SAUVEGARDES = "ressources/sauvegardes/";
     final int POINTS = 10; //Le nombre de points (avant calcul avec coefficients) que le joueur gagne. Baisser pour rendre la question plus compliqué
 
-    void algorithm() {
+    void _algorithm() {
         Joueur joueur = new Joueur();
 
         //Menu d'accueil
@@ -568,8 +568,10 @@ class BoisDesCancres extends Program {
     }
 
     void testScoreIntoNiveau() {
-        println("Il faudrait faire un test pour cette fonction on sait jamais");
-        println("Mais j'ai pas trop compris pourquoi on ajoute 1 aux points avant de diviser par 100 et aussi après avoir divisé par 100");
+        assertEquals(2, scoreIntoNiveau(199));
+        assertEquals(0, scoreIntoNiveau(98));
+        assertEquals(2, scoreIntoNiveau(200));
+        assertEquals(0, scoreIntoNiveau(-98));
     }
 
     /////////////////////////
