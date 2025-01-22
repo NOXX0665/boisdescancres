@@ -276,11 +276,11 @@ id,difficulté,question,liste_reponses,indice
 275,4,Quel est le pluriel de "person" en anglais ?,people;1,Ce n'est pas "persons"
 276,4,Comment tra;duit-on "Je dois partir" en anglais ?,i have to leave;1,Le mot leave est dedans
 277,4,Que signifie "to try" en français ?,essayer;1,Ce que tu fais avant de réussir
-278,4,Comment dit-on "Il fait froid" en anglais ?,it is cold;1,Le mot cold est dedans
+278,4,Comment dit-on "Il fait froid" en anglais ?,it is cold;1;it's cold;1,Le mot cold est dedans
 279,4,Quel est le contraire de "noir" en anglais ?,white;1,C'est la couleur opposée
 280,4,Comment traduit-on "Je t'attends" en anglais ?,i am waiting for you;1,Le mot waiting est dedans
 281,4,Que signifie "to create" en français ?,créer;1,Ce que fait un artiste
-282,4,Comment dit-on "Il fait chaud" en anglais ?,it is hot;1,Le mot hot est dedans
+282,4,Comment dit-on "Il fait chaud" en anglais ?,it is hot;1;it's hot;1,Le mot hot est dedans
 283,4,Quel est le pluriel irrégulier de "woman" en anglais ?,women;1,Ce n'est pas "womans"
 284,4,Comment traduit-on "Je suis heureux" en anglais ?,i am happy;1,Le mot happy est dedans
 285,4,Que signifie "to answer" en français ?,répondre;1,Ce que tu fais à une question
@@ -288,11 +288,11 @@ id,difficulté,question,liste_reponses,indice
 287,4,Quel est le contraire de "long" en anglais ?,short;1,Ce n'est pas grand
 288,4,Comment traduit-on "Je suis en colère" en anglais ?,i am angry;1,Le mot angry est dedans
 289,4,Que signifie "to travel" en français ?,voyager;1,Ce que tu fais pour visiter d'autres pays
-290,4,Comment dit-on "Il pleut" en anglais ?,it is raining;1,Le mot raining est dedans
+290,4,Comment dit-on "Il pleut" en anglais ?,it is raining;1;it's raining;1,Le mot raining est dedans
 291,4,Quel est le pluriel irrégulier de "goose" en anglais ?,geese;1,Ce n'est pas "gooses"
 292,4,Comment traduit-on "Je suis perdu" en anglais ?,i am lost;1,Le mot lost est dedans
 293,4,Que signifie "to listen" en français ?,écouter;1,Ce que tu fais avec tes oreilles
-294,4,Comment dit-on "Il neige" en anglais ?,it is snowing;1,Le mot snowing est dedans
+294,4,Comment dit-on "Il neige" en anglais ?,it is snowing;1;it's snowing;1,Le mot snowing est dedans
 295,4,Quel est le contraire de "happy" en anglais ?,sad;1,Le contraire de joyeux
 296,4,Comment traduit-on "Je suis prêt" en anglais ?,i am ready;1,Le mot ready est dedans
 297,4,Que signifie "to learn" en français ?,apprendre;1,Ce que tu fais en ce moment
